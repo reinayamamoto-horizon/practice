@@ -1,0 +1,4 @@
+Django>=5.0
+mysqlclient
+python-dotenv
+Pillow>=10.0

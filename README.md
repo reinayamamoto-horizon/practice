@@ -98,22 +98,18 @@ python manage.py runserver
 
 Docker 利用時は `python manage.py` の前に `docker-compose exec web` を付けて実行してください。
 
-## ファイル配置
+## ブランチ運用
 
-```
-practice/
-├── config/          # Django 設定
-│   ├── settings.py
-│   ├── urls.py
-│   ├── wsgi.py
-│   └── asgi.py
-├── manage.py
-├── requirements.txt
-├── docker-compose.yml
-├── dockerfile
-├── .env.example
-└── .env             # 要作成（git 管理外）
-```
+### stagingブランチからチェックしてください
+`staging　→ git checkout -b add_new_branch`
+
+### pushは自分で作成したブランチに向かって行ってください
+`push origin add_new_branch`
+
+**mainブランチには反映しないでください！**
+
+### プルリクを作成したら他の人にレビューをもらいましょう！
+プルリクはstagingに向かって行いましょう
 
 ## 注意点
 

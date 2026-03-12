@@ -65,26 +65,12 @@ docker-compose exec web python manage.py createsuperuser
 
 # マイグレーション作成（アプリ追加後など）
 docker-compose exec web python manage.py makemigrations
+
+# 新しいアプリを作成する際に使用するコマンド
+docker-compose exec web python manage.py アプリ名
 ```
 
-### ローカルで実行する場合（venv + SQLite）
 
-```bash
-# 仮想環境の作成と有効化
-python -m venv venv
-source venv/bin/activate   # Windows: venv\Scripts\activate
-
-# 依存関係インストール
-pip install -r requirements.txt
-
-# マイグレーション適用
-python manage.py migrate
-
-# 開発サーバー起動
-python manage.py runserver
-```
-
-- アプリ: http://127.0.0.1:8000/
 
 ### よく使う Django コマンド
 

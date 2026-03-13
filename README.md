@@ -2,6 +2,20 @@
 
 Django と MySQL を使った Web アプリケーションの練習用プロジェクトです。
 
+
+## ブランチ運用
+
+### stagingブランチからチェックしてください
+`staging　→ git checkout -b add_new_branch`
+
+### pushは自分で作成したブランチに向かって行ってください
+`push origin add_new_branch`
+
+**mainブランチには反映しないでください！**
+
+### プルリクを作成したら他の人にレビューをもらいましょう！
+プルリクはstagingに向かって行いましょう
+
 ## 技術スタック
 
 - Python 3.12
@@ -84,18 +98,7 @@ docker-compose exec web python manage.py アプリ名
 
 Docker 利用時は `python manage.py` の前に `docker-compose exec web` を付けて実行してください。
 
-## ブランチ運用
 
-### stagingブランチからチェックしてください
-`staging　→ git checkout -b add_new_branch`
-
-### pushは自分で作成したブランチに向かって行ってください
-`push origin add_new_branch`
-
-**mainブランチには反映しないでください！**
-
-### プルリクを作成したら他の人にレビューをもらいましょう！
-プルリクはstagingに向かって行いましょう
 
 ## 注意点
 

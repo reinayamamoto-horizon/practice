@@ -47,6 +47,9 @@ docker-compose up -d
 # ビルドして起動
 docker-compose up --build
 
+# イメージを再ビルドして起動
+docker-compose build --no-cache
+
 # 停止・削除
 docker-compose down
 ```
@@ -82,6 +85,7 @@ python manage.py migrate
 
 # 開発サーバー起動
 python manage.py runserver
+
 ```
 
 - アプリ: http://127.0.0.1:8000/

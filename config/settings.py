@@ -27,7 +27,7 @@ API_URL = "https://api.openai.com/v1/images/generations"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 LOGGING = {
     'version': 1,

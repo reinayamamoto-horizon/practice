@@ -4,5 +4,4 @@ __pycache__
 .env
 *.log
 logs
-node_modules/
-.vite
+node_modules

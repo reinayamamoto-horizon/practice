@@ -61,6 +61,9 @@ docker-compose up -d
 # ビルドして起動
 docker-compose up --build
 
+# イメージを再ビルドして起動
+docker-compose build --no-cache
+
 # 停止・削除
 docker-compose down
 ```
@@ -84,7 +87,43 @@ docker-compose exec web python manage.py makemigrations
 docker-compose exec web python manage.py アプリ名
 ```
 
+### Vite 開発サーバー（別コンテナ）
 
+`vite` サービスで Vite が常時起動します。`docker compose up` で Django (9000) と Vite (5173) が両方動きます。
+
+```bash
+# 通常の起動で OK（web + vite が立ち上がる）
+docker compose up -d
+
+# 初回または @rollup/rollup-linux-arm64-gnu エラーが出た場合のみ:
+docker compose down
+docker volume rm practice_web_node_modules 2>/dev/null || true
+docker compose build --no-cache
+docker compose up -d
+```
+
+- Django: http://localhost:9000/
+- Vite: http://localhost:5173/
+
+### ローカルで実行する場合（venv + SQLite）
+
+```bash
+# 仮想環境の作成と有効化
+python -m venv venv
+source venv/bin/activate   # Windows: venv\Scripts\activate
+
+# 依存関係インストール
+pip install -r requirements.txt
+
+# マイグレーション適用
+python manage.py migrate
+
+# 開発サーバー起動
+python manage.py runserver
+
+```
+
+- アプリ: http://127.0.0.1:8000/
 
 ### よく使う Django コマンド
 

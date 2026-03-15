@@ -1,0 +1,29 @@
+@layer components{
+body {
+  margin: 0 auto;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.full {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: url(/static/img/full.png)
+    center / cover;
+}
+
+
+.div {
+  top: calc(50% - 0.5em);
+  width: 100%;
+  text-align: center;
+  line-height: 1;
+  font-size: 8vw;
+  text-shadow: 10px 10px 0 #fff;
+}
+}
+.fonts{
+    font-family: "DotGothic16", sans-serif;
+    font-size: large;
+}

@@ -32,6 +32,7 @@ services:
       "
     volumes:
       - .:/code
+      - web_node_modules:/code/node_modules
     ports:
       - "8000:8000"
     env_file:
@@ -40,5 +41,17 @@ services:
       db:
         condition: service_healthy
 
+  vite:
+    build: .
+    container_name: django_vite
+    restart: unless-stopped
+    command: npm run dev
+    volumes:
+      - .:/code
+      - web_node_modules:/code/node_modules
+    ports:
+      - "5173:5173"
+
 volumes:
   mysql_data:
+  web_node_modules: 

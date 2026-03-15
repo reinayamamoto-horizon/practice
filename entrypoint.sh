@@ -1,5 +1,7 @@
 #!/bin/sh
 set -e
-# コンテナ内の /code/node_modules（ボリューム）に Linux 用依存を入れる
-cd /code && npm install
+# vite のときだけ npm install（web は Django のみなのでスキップ）
+if [ "$1" = "npm" ]; then
+  cd /code && npm install
+fi
 exec "$@"

@@ -2,6 +2,20 @@
 
 Django と MySQL を使った Web アプリケーションの練習用プロジェクトです。
 
+
+## ブランチ運用
+
+### stagingブランチからチェックしてください
+`staging　→ git checkout -b add_new_branch`
+
+### pushは自分で作成したブランチに向かって行ってください
+`push origin add_new_branch`
+
+**mainブランチには反映しないでください！**
+
+### プルリクを作成したら他の人にレビューをもらいましょう！
+プルリクはstagingに向かって行いましょう
+
 ## 技術スタック
 
 - Python 3.12
@@ -68,6 +82,9 @@ docker-compose exec web python manage.py createsuperuser
 
 # マイグレーション作成（アプリ追加後など）
 docker-compose exec web python manage.py makemigrations
+
+# 新しいアプリを作成する際に使用するコマンド
+docker-compose exec web python manage.py アプリ名
 ```
 
 ### Vite 開発サーバー（別コンテナ）
@@ -120,23 +137,22 @@ python manage.py runserver
 
 Docker 利用時は `python manage.py` の前に `docker-compose exec web` を付けて実行してください。
 
-## ファイル配置
 
-```
-practice/
-├── config/          # Django 設定
-│   ├── settings.py
-│   ├── urls.py
-│   ├── wsgi.py
-│   └── asgi.py
-├── manage.py
-├── requirements.txt
-├── docker-compose.yml
-├── dockerfile
-├── .env.example
-└── .env             # 要作成（git 管理外）
-```
 
 ## 注意点
 
 - 現在の `config/settings.py` では `DATABASES` に SQLite が指定されています。Docker で MySQL を使う場合は、`python-dotenv` で `.env` を読み込み、環境変数から `DATABASES` を組み立てるように設定を変更する必要があります。
+
+
+## エイリアスの設定
+
+`nano ~/.zshrc`
+または、
+`nano ~/.bashrc`
+に以下を指定すると`dcu` `dcm` などのコマンドが使用できる
+
+```
+alias dcu='docker compose up -d'
+alias dcw='docker compose exec web'
+alias dcm='docker compose exec web python manage.py'
+```

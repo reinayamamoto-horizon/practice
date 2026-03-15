@@ -1,0 +1,31 @@
+{
+  "name": "practice",
+  "version": "1.0.0",
+  "description": "Django と MySQL を使った Web アプリケーションの練習用プロジェクトです。",
+  "main": "index.js",
+  "scripts": {
+  "dev": "vite",
+  "build": "vite build",
+  "preview": "vite preview",
+  "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reinayamamoto-horizon/practice.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/reinayamamoto-horizon/practice/issues"
+  },
+  "homepage": "https://github.com/reinayamamoto-horizon/practice#readme",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.2.1",
+    "@tailwindcss/vite": "^4.2.1",
+    "tailwindcss": "^4.2.1",
+    "vite": "~7.3.1"
+  }
+  
+}

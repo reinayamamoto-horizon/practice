@@ -1,0 +1,17 @@
+evolution = JobEvolution.objects.get(job=job, stage=stage)
+
+STAGE_PROMPTS = {
+    1: "Stage 1: novice priest, young priest wearing simple white robe and wooden holy symbol, holding small prayer staff, humble appearance, gentle expression, faint holy light, classic fantasy style",
+    2: "Stage 2: seasoned priest, experienced priest wearing decorated ceremonial robe with golden embroidery, holding sacred staff with glowing crystal, confident posture, stronger holy aura, divine light surrounding the hands",
+    3: "Stage 3: high priest, legendary high priest wearing radiant sacred robe and ornate crown, holding powerful holy staff, massive divine aura radiating outward, wings of light appearing behind, holy energy illuminating the surroundings, epic fantasy style"
+}
+stage_desc = STAGE_PROMPTS.get(stage, "")
+
+
+
+prompt = f"""
+{evolution.title} fantasy character,
+{stage_desc}
+epic RPG character design,
+full body, high detail
+"""

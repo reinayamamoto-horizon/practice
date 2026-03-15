@@ -70,6 +70,24 @@ docker-compose exec web python manage.py createsuperuser
 docker-compose exec web python manage.py makemigrations
 ```
 
+### Vite 開発サーバー（別コンテナ）
+
+`vite` サービスで Vite が常時起動します。`docker compose up` で Django (9000) と Vite (5173) が両方動きます。
+
+```bash
+# 通常の起動で OK（web + vite が立ち上がる）
+docker compose up -d
+
+# 初回または @rollup/rollup-linux-arm64-gnu エラーが出た場合のみ:
+docker compose down
+docker volume rm practice_web_node_modules 2>/dev/null || true
+docker compose build --no-cache
+docker compose up -d
+```
+
+- Django: http://localhost:9000/
+- Vite: http://localhost:5173/
+
 ### ローカルで実行する場合（venv + SQLite）
 
 ```bash

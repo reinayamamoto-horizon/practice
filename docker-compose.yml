@@ -28,17 +28,30 @@ services:
       sh -c "
       until [ -f /code/manage.py ]; do sleep 1; done &&
       python manage.py migrate &&
-      python manage.py runserver 0.0.0.0:8000
+      python manage.py runserver 0.0.0.0:8001
       "
     volumes:
       - .:/code
+      - web_node_modules:/code/node_modules
     ports:
-      - "9000:8000"
+      - "9000:8001"
     env_file:
       - .env
     depends_on:
       db:
         condition: service_healthy
 
+  vite:
+    build: .
+    container_name: django_vite
+    restart: unless-stopped
+    command: npm run dev
+    volumes:
+      - .:/code
+      - web_node_modules:/code/node_modules
+    ports:
+      - "5173:5173"
+
 volumes:
   mysql_data:
+  web_node_modules: 

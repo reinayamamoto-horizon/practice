@@ -114,5 +114,6 @@ Docker 利用時は `python manage.py` の前に `docker-compose exec web` を�
 
 ```
 alias dcu='docker compose up -d'
+alias dcw='docker compose exec web'
 alias dcm='docker compose exec web python manage.py'
 ```

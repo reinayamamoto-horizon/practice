@@ -2,7 +2,6 @@
 __pycache__
 *.pyc
 .env
-*.log
-logs
+logs/django.log
 node_modules/
 .vite

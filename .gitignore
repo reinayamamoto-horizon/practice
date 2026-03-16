@@ -1,1 +1,7 @@
+.git
+__pycache__
+*.pyc
 .env
+logs/django.log
+node_modules/
+.vite

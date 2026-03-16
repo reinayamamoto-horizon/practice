@@ -1,0 +1,11 @@
+{
+  "config/static/css/input.css": {
+    "file": "assets/input.css",
+    "src": "config/static/css/input.css",
+    "isEntry": true,
+    "name": "input",
+    "names": [
+      "input.css"
+    ]
+  }
+}

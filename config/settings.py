@@ -153,4 +153,4 @@ STATICFILES_DIRS = [
     BASE_DIR / 'config' / 'static',
 ]
 # 開発時は Vite の dev server から CSS を読む
-VITE_DEV_SERVER_URL = 'http://127.0.0.1:5173'
+VITE_DEV_SERVER_URL = 'http://127.0.0.1:5174'

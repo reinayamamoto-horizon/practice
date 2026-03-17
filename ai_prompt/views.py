@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def evolution(request):
+    return render(request, 'ai_prompt/evolution.html')

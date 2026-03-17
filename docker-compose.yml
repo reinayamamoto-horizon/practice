@@ -13,7 +13,7 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     ports:
-      - "3305:3306"
+      - "${DB_PORT}:3306"
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 5s
@@ -32,13 +32,26 @@ services:
       "
     volumes:
       - .:/code
+      - web_node_modules:/code/node_modules
     ports:
-      - "9000:8000"
+      - "${WEB_PORT}:8000"
     env_file:
       - .env
     depends_on:
       db:
         condition: service_healthy
 
+  vite:
+    build: .
+    container_name: django_vite
+    restart: unless-stopped
+    command: npm run dev
+    volumes:
+      - .:/code
+      - web_node_modules:/code/node_modules
+    ports:
+      - "${VITE_PORT}:5173"
+
 volumes:
   mysql_data:
+  web_node_modules: 

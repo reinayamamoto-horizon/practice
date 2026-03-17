@@ -56,16 +56,16 @@ cp .env.example .env
 
 ```bash
 # バックグラウンドで DB + Web 起動
-docker-compose up -d
+docker compose up -d
 
 # ビルドして起動
-docker-compose up --build
+docker compose up --build
 
 # イメージを再ビルドして起動
-docker-compose build --no-cache
+docker compose build --no-cache
 
 # 停止・削除
-docker-compose down
+docker compose down
 ```
 
 - アプリ: http://localhost:8000
@@ -75,16 +75,16 @@ docker-compose down
 
 ```bash
 # マイグレーション適用
-docker-compose exec web python manage.py migrate
+docker compose exec web python manage.py migrate
 
 # 管理ユーザー作成
-docker-compose exec web python manage.py createsuperuser
+docker compose exec web python manage.py createsuperuser
 
 # マイグレーション作成（アプリ追加後など）
-docker-compose exec web python manage.py makemigrations
+docker compose exec web python manage.py makemigrations
 
 # 新しいアプリを作成する際に使用するコマンド
-docker-compose exec web python manage.py アプリ名
+docker compose exec web python manage.py startapp アプリ名
 ```
 
 ### Vite 開発サーバー（別コンテナ）

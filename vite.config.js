@@ -19,7 +19,7 @@ export default defineConfig({
   server: {
     host: true, // 0.0.0.0 で待ち受け（Docker からホストでアクセス可能にする）
     port: 5173,
-    origin: 'http://127.0.0.1:5173',
+    origin: 'http://127.0.0.1:5174',
     cors: true,
   },
 })

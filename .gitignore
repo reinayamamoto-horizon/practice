@@ -5,3 +5,5 @@ __pycache__
 logs/django.log
 node_modules/
 .vite
+config/static/dist/
+db.sqlite3

@@ -55,7 +55,8 @@ LOGGING = {
 # Application definition
 
 INSTALLED_APPS = [
-    'ai_prompt',
+    'constants',
+    'evolution_prompt',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

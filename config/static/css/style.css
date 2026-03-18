@@ -1,19 +1,19 @@
 @layer components{
-body {
+  body {
   margin: 0 auto;
   appearance: none;
   -webkit-appearance: none;
-}
+  }
 
-.full {
-  position: relative;
+  .full {
   width: 100%;
   min-height: 100vh;
-  background: url(/static/img/ai_prompt/full.png)
+  background: url(/static/img/evolution_prompt/full.png)
     center / cover;
-}
+  }
 
 }
+
 .sab-fonts{
   font-family: "DotGothic16", sans-serif;
   font-size: 35px;
@@ -27,4 +27,21 @@ body {
   border-bottom: 4px solid #000;
   box-shadow: 4px 4px 0 #423536;
   transition: all 0.075s ease;
+}
+
+.fonts{
+  font-family: "DotGothic16", sans-serif;
+}
+
+.style{
+  background-color: #260904;
+  border-top: 3px solid #fff;
+  border-left: 3px solid #fff;
+  border-right: 4px solid #000;
+  border-bottom: 4px solid #000;
+  box-shadow: 4px 4px 0 #423536;
+}
+
+.evolutions{
+
 }

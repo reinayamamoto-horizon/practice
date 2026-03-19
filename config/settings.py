@@ -55,6 +55,7 @@ LOGGING = {
 # Application definition
 
 INSTALLED_APPS = [
+    'settings.py',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- reset.css modern-css-reset -->
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <!-- Tailwind CSSを追加 -->
+    {% if VITE_DEV_SERVER_URL %}
+    <link rel="stylesheet" href="{{ VITE_DEV_SERVER_URL }}/config/static/css/input.css" />
+    {% else %}
+    <link rel="stylesheet" href="{% static 'dist/assets/input.css' %}" />
+    {% endif %}
+    <title>Document</title>
+</head>
+<body>
+    <div class="first-full">
+
+        <main class="flex items-center justify-center min-h-screen">
+            <div>
+                <ul class="error-messages">
+                    {% if error %}
+                    <li>{{ error }}</li>
+                    {% endif %}
+                    {% if form.non_field_errors %}
+                    {% for err in form.non_field_errors %}
+                    <li>{{ err }}</li>
+                    {% endfor %}
+                    {% endif %}
+                    {% for field in form %}
+                    {% for err in field.errors %}
+                    <li>{{ field.label }}: {{ err }}</li>
+                    {% endfor %}
+                    {% endfor %}
+                </ul>
+                <h1 class="h1">SignUp</h1>
+
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <input class="form-control" type="text" name="username" placeholder="Username" />
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <input class="form-control" type="text" name="email" placeholder="Email" />
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <input class="form-control" type="password" name="password1" placeholder="Password" />
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <input class="form-control" type="password" name="password2" placeholder="Password （確認）" />
+                    </fieldset>
+                
+                        <div class="my-4 justify-self-end">
+                            <button class="pixel-btn" type="submit">
+                                <span class="pixel-text fonts">Start</span>
+                                <div class="pixel-grid"></div>
+                            </button>
+                        </div>
+                    
+                </form>
+
+                <a class="text-blue-700" href="{% url 'login' %}">アカウントをお持ちですか？</a>
+            </div>
+            
+        </main>
+    </div>
+</body>
+</html>

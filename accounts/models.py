@@ -7,14 +7,14 @@ class User(AbstractUser):
 
 
 class Prompts(models.Model):
-    character_id = models.ForeignKey(
+    character = models.ForeignKey(
         "Character",
         on_delete=models.CASCADE
     )
-    styles = models.TextField()
-    seed = models.IntegerField()
-    model = models.TextField()
-    negative_prompt = models.TextField()
+    styles = models.TextField(null=False)
+    seed = models.IntegerField(null=False)
+    model = models.TextField(null=False)
+    negative_prompt = models.TextField(null=False)
 
 
 class Todo(models.Model):
@@ -43,9 +43,9 @@ class Character(models.Model):
     level = models.IntegerField()
     evolution = models.CharField(max_length=255)
 
-    character_name = models.TextField()
+    character_name = models.TextField(null=False)
     created_at = models.DateTimeField(auto_now_add=True)
-    image_url = models.TextField()
+    image_url =models.ImageField(upload_to='characters/', blank=True)
     create_character = models.DateTimeField()
 
 class Job(models.Model):

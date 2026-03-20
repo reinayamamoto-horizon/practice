@@ -1,18 +1,25 @@
 @layer components{
   body {
-  margin: 0 auto;
-  appearance: none;
-  -webkit-appearance: none;
+    margin: 0 auto;
+    appearance: none;
+    -webkit-appearance: none;
   }
 
   .full {
-  width: 100%;
-  min-height: 100vh;
-  background: url(/static/img/evolution_prompt/full.png)
-    center / cover;
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background: url(/static/img/full.png)
+      center / cover;
   }
 
-}
+  .first-full{
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background: url(/static/img/first-full.png)
+      center / cover;
+  }
 
 .sab-fonts{
   font-family: "DotGothic16", sans-serif;
@@ -29,6 +36,7 @@
   transition: all 0.075s ease;
 }
 
+}
 .fonts{
   font-family: "DotGothic16", sans-serif;
 }
@@ -42,6 +50,111 @@
   box-shadow: 4px 4px 0 #423536;
 }
 
-.evolutions{
+.form-control {
+  display: block;
+  margin: 12px;
+  padding: 0.5rem 0.75rem;
+  font-size: 1.25rem;
+  line-height: 1.25;
+  color: #b8b6ad;
+  background-color: #737272a6;
+  background-image: none;
+  background-clip: padding-box;
+  transition: border-color 0.15s ease;
+}
 
+/* 入力後のフォーム */
+.form-control:focus,
+.form-control:focus-visible {
+  background-color: #737272a6;
+  outline: none;
+}
+.form-control:-webkit-autofill,
+.form-control:-webkit-autofill:hover,
+.form-control:-webkit-autofill:focus,
+.form-control:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #737272a6 inset;
+  box-shadow: 0 0 0 30px #737272a6 inset;
+}
+
+.h1{
+  color: #fff;
+  margin: 12px ,0;
+  padding: 0.5rem 0.75rem;
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.error-messages{
+  justify-self: center;
+  background: #f3f3f3b7;
+}
+
+
+/* ボタンデザイン */
+
+.pixel-btn {
+  position: relative;
+  padding: 0.5rem 2rem;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+  background: #f3f3f3b7;
+  border: 2px solid #000;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  image-rendering: pixelated;
+}
+
+.pixel-text {
+  position: relative;
+  z-index: 2;
+}
+
+.pixel-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(90deg, transparent 50%, rgba(255, 255, 255, 0.1) 50%),
+    linear-gradient(0deg, transparent 50%, rgba(255, 255, 255, 0.1) 50%);
+  background-size: 4px 4px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.pixel-btn:hover {
+  background: #471c13;
+  border-color: #888;
+  color: #fff;
+  transform: scale(1.05);
+  box-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.3),
+    inset 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.pixel-btn .pixel-grid {
+  opacity: 0;
+  transform: translateY(-100%);
+  animation: pixelScanReverse 0.5s ease forwards;
+}
+
+.pixel-btn:hover .pixel-grid {
+  opacity: 1;
+  animation: pixelScan 0.5s ease forwards;
+}
+
+@keyframes pixelScan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes pixelScanReverse {
+  0% { transform: translateY(100%); }
+  100% { transform: translateY(-100%); }
 }

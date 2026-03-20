@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- reset.css modern-css-reset -->
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <!-- Tailwind CSSを追加 -->
+    {% if VITE_DEV_SERVER_URL %}
+    <link rel="stylesheet" href="{{ VITE_DEV_SERVER_URL }}/config/static/css/input.css" />
+    {% else %}
+    <link rel="stylesheet" href="{% static 'dist/assets/input.css' %}" />
+    {% endif %}
+    <title>Document</title>
+</head>
+<body>
+    <div class="first-full">
+
+        <main class="flex items-center justify-center min-h-screen">
+            <div>
+                <ul class="error-messages">
+                    {% if error %}
+                    <li>{{ error }}</li>
+                    {% endif %}
+                </ul>
+
+                <h1 class="h1">Login</h1>
+
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <input class="form-control " type="username" name="username" placeholder="Email" required />
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <input class="form-control " type="password" name="password" placeholder="Password" required/>
+                    </fieldset>
+                    <div>
+                        <div class="my-4 justify-self-end">
+                            <button class="pixel-btn" type="submit">
+                                <span class="pixel-text fonts">Start</span>
+                                <div class="pixel-grid"></div>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <a class="text-blue-700" href="{% url 'signup' %}">アカウントを登録しますか？</a>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

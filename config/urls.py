@@ -20,4 +20,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('evolution_prompt.urls')),
+    path('accounts/', include('accounts.urls')),
 ]

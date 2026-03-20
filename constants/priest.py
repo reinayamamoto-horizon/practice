@@ -3,13 +3,13 @@ from constants.skills import Skill
 class Priest:
 
     PRIEST_HIGH_PRIEST = "high_priest"
-    PRIEST_CLERIC_KNIGHT = "cleric_kinght"
+    PRIEST_CLERIC_KNIGHT = "cleric_knight"
     PRIEST_BARD_PRIEST = "bard_priest"
 
     CHOICES = [
-        (PRIEST_HIGH_PRIEST, "狂戦士ルート"),
-        (PRIEST_CLERIC_KNIGHT, "守護戦士ルート"),
-        (PRIEST_BARD_PRIEST, "戦術化ルート"),
+        (PRIEST_HIGH_PRIEST, "司祭ルート"),
+        (PRIEST_CLERIC_KNIGHT, "神官ルート"),
+        (PRIEST_BARD_PRIEST, "聖歌士ルート"),
     ]
 
     SKILLS = {

@@ -4,6 +4,9 @@ from constants.warrior import Warrior
 from constants.wizard import Wizard
 from constants.priest import Priest
 from constants.skills import Skill
+from django.http import HttpResponse
+from prompt_modules.evolution_prompt import build_character_image_prompt  # キャラから prompt を作る関数
+from .utils import generate_image  # 上のサンプル関数を utils に置いた想定
 
 
 JOB_CLASS_MAP = {
@@ -16,14 +19,20 @@ JOB_CLASS_MAP = {
 
 def evolution(request):
 
+    character = request.user.character
+    job_class = JOB_CLASS_MAP.get(character.job)
+
     if request.method == "POST":
         evo = request.POST["evolution_id"]
-        character = request.user.character
         character.evolution = evo
         character.save()
 
-        character = request.user.character
-        job_class = JOB_CLASS_MAP.get(character.job)
+        if job_class and hasattr(job_class, "SKILLS"):
+            skill_list = job_class.SKILLS.get(evo, [])
+            if skill_list:
+                skill_key = skill_list[0]
+                params = build_character_image_prompt(character.job, skill_key)
+                image_path = generate_image(params, out_path=f"media/evolutions/{character.id}_{evo}.png")
 
     evolutions = []
     if job_class and hasattr(job_class, "SKILLS"):
@@ -41,4 +50,4 @@ def evolution(request):
                     "description": data["description"],
                 })
 
-    return render(request, 'evolution.html',{"evolutions": evolutions})
+    return render(request, 'evolutions/evolution.html', {"evolutions": evolutions})

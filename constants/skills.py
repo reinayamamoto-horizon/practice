@@ -113,8 +113,8 @@ class Skill:
 
         # Priest
         HIGH_PRIEST: {
-            "name":"呪術ルート",
-            "sub_name": "(特殊サポート)",
+            "name":"司祭ルート",
+            "sub_name": "(純ヒーラー)",
             "power": "攻撃力：★",
             "defense": "防御：★★★",
             "magic": "魔法：★★★★★",
@@ -123,8 +123,8 @@ class Skill:
         },
 
         CLERIC_KNIGHT: {
-            "name":"呪術ルート",
-            "sub_name": "(特殊サポート)",
+            "name":"神官ルート",
+            "sub_name": "(戦闘ヒーラー)",
             "power": "攻撃力：★★★",
             "defense": "防御：★★★★",
             "magic": "魔法：★★★",
@@ -133,8 +133,8 @@ class Skill:
         },
 
         BARD_PRIEST: {
-            "name":"呪術ルート",
-            "sub_name": "(特殊サポート)",
+            "name":"聖歌士ルート",
+            "sub_name": "(バッファー)",
             "power": "攻撃力：★",
             "defense": "防御：★★",
             "magic": "魔法：★★★★",

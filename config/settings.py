@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-qe-&2f&w&jrf)5(0(mzw1fl&y4@6hl(zyq9v6w+e)z4p21+62f'
 # AI API 設定
 AI_API_KEY = os.getenv("AI_API_KEY")
-API_URL = "https://api.openai.com/v1/images/generations"
+API_URL = "https://api.stability.ai/v2beta/stable-image/generate/core​"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 

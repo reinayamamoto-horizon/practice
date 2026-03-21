@@ -19,14 +19,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-qe-&2f&w&jrf)5(0(mzw1fl&y4@6hl(zyq9v6w+e)z4p21+62f'
 # AI API 設定
 AI_API_KEY = os.getenv("AI_API_KEY")
 API_URL = "https://api.openai.com/v1/images/generations"
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
+
+
+DEBUG = True
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 LOGGING = {
@@ -55,6 +55,7 @@ LOGGING = {
 # Application definition
 
 INSTALLED_APPS = [
+    'accounts',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -78,7 +79,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'template'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -92,8 +93,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
-
-
+# カスタムの User モデルを置き換える
+AUTH_USER_MODEL = "accounts.User"
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
@@ -117,17 +118,11 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+        'OPTIONS': {
+            'min_length': 6,
+        },
+    }
 ]
 
 
@@ -152,4 +147,12 @@ STATICFILES_DIRS = [
     BASE_DIR / 'config' / 'static',
 ]
 # 開発時は Vite の dev server から CSS を読む
-VITE_DEV_SERVER_URL = 'http://127.0.0.1:5173'
+VITE_DEV_SERVER_URL = 'http://127.0.0.1:5174'
+ # ログイン
+LOGIN_REDIRECT_URL = '/' 
+LOGIN_URL = '/accounts/login/'  
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

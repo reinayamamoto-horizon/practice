@@ -155,3 +155,8 @@ VITE_DEV_SERVER_URL = 'http://127.0.0.1:5174'
  # ログイン
 LOGIN_REDIRECT_URL = '/' 
 LOGIN_URL = '/accounts/login/'  
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

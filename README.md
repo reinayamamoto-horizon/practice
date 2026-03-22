@@ -136,8 +136,7 @@ python manage.py runserver
 | `python manage.py shell` | Django shell |
 
 Docker 利用時は `python manage.py` の前に `docker-compose exec web` を付けて実行してください。
-
-
+変更
 
 ## 注意点
 

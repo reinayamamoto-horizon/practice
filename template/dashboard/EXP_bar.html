@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- reset.css modern-css-reset -->
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <!-- Tailwind CSSを追加 -->
+    {% if VITE_DEV_SERVER_URL %}
+    <link rel="stylesheet" href="{{ VITE_DEV_SERVER_URL }}/config/static/css/input.css" />
+    {% else %}
+    <link rel="stylesheet" href="{% static 'dist/assets/input.css' %}" />
+    {% endif %}
+    <title>Status</title>
+</head>
+
+<body>
+    <!-- drop-shadowで文字や枠全体が背景から浮き上がるようにする-->
+    <div class="flex items-center p-4 space-x-3 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
+        <!--左上のアイコンの表示設定-->
+        <div class="relative w-20 h-20 flex-shrink-0">
+            <div class="absolute inset-0 rounded-full border-4 border-[#5d4a37] shadow-inner bg-[#2a2a2a]"></div>
+            <div class="absolute inset-1 rounded-full overflow-hidden border-2 border-[#8b7355]">
+                <!--ここにアバターの顔を切り抜いたアイコンを設定-->
+                <img src="path/to/character-icon.jpg" alt="Character" class="w-full h-full object-cover">
+            </div>
+        </div>
+       
+        <div class="flex items-baseline gap-3 mb-1 drop-shadow-[0_2px_2px_rgba(0,0,0,1)]">
+             <!--レベル表示設定-->
+            <div class="text-white font-bold italic text-xl mb-1 flex items-baseline gap-1" style="font-family: 'DotGothic16', sans-serif;">
+                <span class="text-sm">Lv</span>
+                <!--現在のレベル-->
+                <span>{{ Current_level }}</span>
+
+                <div class="text-white text-lg font-bold tracking-wide">
+                    {{ Character_name }}
+                </div>
+            </div>
+            
+            <!--EXPバーの設定-->
+                <!--1.外枠-->
+            <div class="space-y-1.5 bg-black/40 p-2 rounded-sm border border-[#4a3b2b]">
+                <!--2.バー-->
+                <div class="relative h-4 bg-[#1a0f0f] rounded-sm border border-[#3d1a1a] overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-[#800000] to-[#ff3333] shadow-[inset_0_1px_2px_rgba(255,255,255,0.3)]" 
+                    style="width: 80%;">
+                    </div>
+                <!--3.バーの上の数字-->
+                    <div class="absolute inset-0 flex justify-center items-center text-[10px] text-white font-bold drop-shadow-md">
+                        185 / 230
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

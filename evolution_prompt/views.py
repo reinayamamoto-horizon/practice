@@ -6,7 +6,7 @@ from constants.priest import Priest
 from constants.skills import Skill
 from django.http import HttpResponse
 from prompt_modules.evolution_prompt import build_character_image_prompt  # キャラから prompt を作る関数
-from .utils import generate_image  # 上のサンプル関数を utils に置いた想定
+from prompt_modules.utils import generate_image  # 上のサンプル関数を utils に置いた想定
 
 
 JOB_CLASS_MAP = {

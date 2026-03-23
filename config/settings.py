@@ -109,7 +109,7 @@ DATABASES = {
         'USER': os.environ.get('MYSQL_USER', 'django_user'),
         'PASSWORD': os.environ.get('MYSQL_PASSWORD', 'django_password'),
         'HOST': os.environ.get('MYSQL_HOST', 'localhost'),
-        'PORT': os.environ.get('MYSQL_PORT', '3306'),
+        'PORT': os.environ.get('MYSQL_PORT', '3305'),
         'OPTIONS': {
             'charset': 'utf8mb4',
         },

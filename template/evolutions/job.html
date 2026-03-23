@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- reset.css modern-css-reset -->
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <!-- Tailwind CSSを追加 -->
+    {% if VITE_DEV_SERVER_URL %}
+    <link rel="stylesheet" href="{{ VITE_DEV_SERVER_URL }}/config/static/css/input.css" />
+    {% else %}
+    <link rel="stylesheet" href="{% static 'dist/assets/input.css' %}" />
+    {% endif %}
+    <title>キャラクターの職業を選択しよう！</title>
+</head>
+<body>
+    <div class="full">
+        <header >
+            <button class="sab-fonts m-14" type="button" onclick="history.back()">
+                < back
+            </button>
+        </header>
+
+        <main class="my-24">
+
+            <div class="flex justify-start pl-[15%]">
+              <p class="fonts text-white text-[45px] style p-2">
+                進化する職業を選択
+              </p>
+            </div>
+        
+            <div class="evolution-container flex gap-24 justify-center m-25">
+
+                
+                
+            </div>
+        
+          </main>
+    </div>
+</body>
+</html>

@@ -9,6 +9,7 @@ from .forms import SignupForm
 # Create your views here.
 class Login (LoginView):
     template_name = "accounts/login.html"
+    next_page = reverse_lazy("evolution_prompt:job")  
 
     def form_invalid(self, form):
         context = self.get_context_data(form=form)
@@ -20,6 +21,7 @@ class Signup(CreateView):
     form_class = SignupForm
     template_name = "accounts/signup.html"
     success_url = reverse_lazy("login")
+    next_page = reverse_lazy("evolution_prompt:job")   
 
     def form_valid(self, form):
         try:

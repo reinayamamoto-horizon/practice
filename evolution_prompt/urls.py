@@ -5,4 +5,5 @@ app_name = 'evolution_prompt'
 
 urlpatterns = [
     path('evolution/', views.evolution, name='evolution'),
+    path('job/', views.evolution, name='job'),
 ]

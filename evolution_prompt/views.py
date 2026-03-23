@@ -51,3 +51,7 @@ def evolution(request):
                 })
 
     return render(request, 'evolutions/evolution.html', {"evolutions": evolutions})
+
+
+def job(request):
+    return render(request, "evolutions/job.html")

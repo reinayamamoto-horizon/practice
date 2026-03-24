@@ -21,8 +21,7 @@ class Login (LoginView):
 class Signup(CreateView):
     form_class = SignupForm
     template_name = "accounts/signup.html"
-    success_url = reverse_lazy("login")
-    next_page = reverse_lazy("evolution_prompt:job")   
+    success_url = reverse_lazy("evolution_prompt:job")  
 
     def form_valid(self, form):
         try:

@@ -1,40 +1,43 @@
 import requests
-from django.conf import settings  # Django であれば
+from django.conf import settings  
 
-API_URL = settings.API_URL           # "https://api.stability.ai/v2beta/stable-image/generate/core"
-API_KEY = settings.AI_API_KEY        # .env の AI_API_KEY
+API_URL = settings.API_URL           
+API_KEY = settings.AI_API_KEY        
 
-def generate_image(params: dict, out_path: str = "output.png") -> str:
-    """
-    build_character_image_prompt() が返す dict を受け取り、
-    Stability AI で画像を生成してファイルに保存する。
-    """
+def generate_image(params: dict, out_path: str = "output.png", image_path: str = None) -> str:
     if not API_KEY:
         raise RuntimeError("AI_API_KEY が設定されていません")
 
     headers = {
         "Authorization": f"Bearer {API_KEY}",
-        "Accept": "image/png",
+        "Accept": "image/*",
     }
 
-    data = {
-        "model": "stable-image-core",
-        **params,
-    }
+    files = {}
+    if image_path:
+        files["image"] = open(image_path, "rb")
+    else:
+        files["none"] = ""
 
     try:
         response = requests.post(
             API_URL,
             headers=headers,
-            data=data,
+            files=files,
+            data=params,
             timeout=60,
         )
         response.raise_for_status()
     except requests.exceptions.RequestException as e:
-        raise RuntimeError(f"Stability API request failed: {e}") from e
+        body = getattr(e.response, "text", "no response body")
+        raise RuntimeError(
+            f"Stability API request failed: {e}\nResponse body: {e.response.text}"
+        ) from e
+    finally:
+        if image_path and "image" in files:
+            files["image"].close()
 
-    image_bytes = response.content
     with open(out_path, "wb") as f:
-        f.write(image_bytes)
+        f.write(response.content)
 
     return out_path

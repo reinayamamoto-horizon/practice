@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- reset.css modern-css-reset -->
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <!-- Tailwind CSSを追加 -->
+    {% if VITE_DEV_SERVER_URL %}
+    <link rel="stylesheet" href="{{ VITE_DEV_SERVER_URL }}/config/static/css/input.css" />
+    {% else %}
+    <link rel="stylesheet" href="{% static 'dist/assets/input.css' %}" />
+    {% endif %}
+    <title>キャラクターを進化させよう！</title>
+</head>
+<body>
+    {% if character.image_url %}
+    <div class="relative w-full min-h-screen bg-fixed bg-cover bg-top"
+         style="background-image: url('{{ MEDIA_URL }}{{ character.image_url }}');">
+        <header>
+            <button class="sab-fonts m-14" type="button" onclick="history.back()">
+                &lt; back
+            </button>
+        </header>
+    </div>
+    {% else %}
+    <div class="full">
+        <header>
+            <button class="sab-fonts m-14" type="button" onclick="history.back()">
+                &lt; back
+            </button>
+        </header>
+        <main class="flex flex-col items-center justify-center my-20">
+            <p class="fonts text-white text-2xl">画像が生成されませんでした</p>
+        </main>
+    </div>
+    {% endif %}
+</body>
+</html>

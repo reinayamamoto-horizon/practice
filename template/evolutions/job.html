@@ -17,26 +17,43 @@
     <title>キャラクターの職業を選択しよう！</title>
 </head>
 <body>
-    <div class="full">
-        <header >
+    <div class="job-full">
+        <header class="flex justify-start pl-[10%]">
             <button class="sab-fonts m-14" type="button" onclick="history.back()">
                 < back
             </button>
-        </header>
-
-        <main class="my-24">
-
-            <div class="flex justify-start pl-[15%]">
+            <div class="m-14">
               <p class="fonts text-white text-[45px] style p-2">
                 進化する職業を選択
               </p>
+              <p class="fonts text-white pt-4">※職業は変更できません</p>
             </div>
-        
-            <div class="evolution-container flex gap-24 justify-center m-25">
+        </header>
 
-                
-                
-            </div>
+        <main class="my-20">
+
+            {% if error %}
+            <p class="fonts text-red-400 pl-[15%]">{{ error }}</p>
+            {% endif %}
+        
+            <form method="post" action="{% url 'evolution_prompt:job' %}" class="evolution-container flex flex-col items-center justify-center gap-8 m-25">
+              {% csrf_token %}
+              <div class=" px-8 flex flex-col items-center justify-center gap-2">
+                <label class="skill-fonts text-center py-16 px-8  hover:translate-y-1 hover:shadow-inner has-[:checked]:bg-[#423536] has-[:checked]:text-white">
+                  <input type="radio" name="job_id" value="hero" required class="hidden"> 勇者
+              </label>
+              <label class="skill-fonts text-center py-16 px-8  hover:translate-y-1 hover:shadow-inner has-[:checked]:bg-[#423536] has-[:checked]:text-white">
+                  <input type="radio" name="job_id" value="warrior" class="hidden"> 戦士
+              </label>
+              <label class="skill-fonts text-center py-16 px-8  hover:translate-y-1 hover:shadow-inner has-[:checked]:bg-[#423536] has-[:checked]:text-white">
+                  <input type="radio" name="job_id" value="wizard" class="hidden"> 魔法使い
+              </label>
+              <label class="skill-fonts text-center py-16 px-8  hover:translate-y-1 hover:shadow-inner has-[:checked]:bg-[#423536] has-[:checked]:text-white">
+                  <input type="radio" name="job_id" value="priest" class="hidden"> 僧侶
+              </label>
+              </div>
+              <button type="submit" class="sab-fonts">決定</button>
+          </form>
         
           </main>
     </div>

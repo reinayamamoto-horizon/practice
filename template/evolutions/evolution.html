@@ -18,19 +18,18 @@
 </head>
 <body>
     <div class="full">
-        <header >
+        <header class="flex justify-start pl-[10%]">
             <button class="sab-fonts m-14" type="button" onclick="history.back()">
                 < back
             </button>
+            <div class="m-14">
+                <p class="fonts text-white text-[45px] style p-2">
+                  キャラクターを進化させよう！
+                </p>
+            </div>
         </header>
 
-        <main class="my-24">
-
-            <div class="flex justify-start pl-[15%]">
-              <p class="fonts text-white text-[45px] style p-2">
-                キャラクターを進化させよう！
-              </p>
-            </div>
+        <main class="my-10">
         
             <div class="evolution-container flex gap-24 justify-center m-25">
 
@@ -38,7 +37,7 @@
                 
                 <div class="evolution-card ">
                     
-                    <form method="post" action="/evolution/select/">
+                    <form method="post" action="{% url 'evolution_prompt:evolution' %}">
                     {% csrf_token %}
                     
                         <input type="hidden" name="evolution_id" value="{{ evo.id }}">

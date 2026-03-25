@@ -9,6 +9,7 @@ from .forms import SignupForm
 # Create your views here.
 class Login (LoginView):
     template_name = "accounts/login.html"
+    next_page = reverse_lazy("dashboard:EXP_bar")
 
     def form_invalid(self, form):
         context = self.get_context_data(form=form)

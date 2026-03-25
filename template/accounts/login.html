@@ -39,19 +39,10 @@
                     </fieldset>
                     <div>
                         <div class="my-4 justify-self-end">
-                            {% if user.is_authenticated %}
-                                <a href="{% url 'dashboard:EXP_bar' user_id=user.id %}" style="text-decoration: none;">>
-                                    <button class="pixel-btn" type="submit">
-                                        <span class="pixel-text fonts">Start</span>
-                                        <div class="pixel-grid"></div>
-                                    </button>
-                                </a>
-                            {% else %}
-                                <button class="pixel-btn" type="button" disabled>
-                                    <span class="pixel-text fonts">Please Login</span>
-                                    <div class="pixel-grid"></div>
-                                </button>
-                            {% endif %}
+                            <button class="pixel-btn" type="submit">
+                                <span class="pixel-text fonts">Start</span>
+                                <div class="pixel-grid"></div>
+                            </button>
                         </div>
                     </div>
                 </form>

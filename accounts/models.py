@@ -47,11 +47,13 @@ class Todo(models.Model):
 class Character(models.Model):
     user = models.ForeignKey("User", on_delete=models.CASCADE)
     job = models.ForeignKey("Job", on_delete=models.CASCADE)
-    level = models.IntegerField(null=False)
+    level = models.IntegerField(null=False, default=1)
+    exp = models.IntegerField(default=0) 
     evolution = models.CharField(max_length=255)
     character_name = models.TextField(null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     image_url = models.ImageField(upload_to='characters/', blank=True)
+    
 
 class Job(models.Model):
     job_id = models.CharField(max_length=255)

@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import View
-from .models import EXP
+from accounts.models import EXP
 from accounts.models import Todo,Character 
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class EXPbarView(View):
+class EXPbarView(LoginRequiredMixin,View):
     def get(self, request, user_id):
         User_EXPdata = get_object_or_404(EXP, user_id=user_id)
         context = {
@@ -13,7 +14,7 @@ class EXPbarView(View):
         }
         return render(request, "dashboard/EXP_bar.html", context)
     
-EXP_bar = EXPbarView.as_view()
+
         
 class TodoListView(View):
     pass
@@ -50,3 +51,5 @@ class TodoEditView(View):
 
 class TodoDeleteView(View):
     pass
+
+EXP_bar = EXPbarView.as_view()

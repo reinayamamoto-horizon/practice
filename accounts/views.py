@@ -1,3 +1,4 @@
+from .models import Character
 from django.shortcuts import render
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth import login
@@ -25,6 +26,7 @@ class Signup(CreateView):
     def form_valid(self, form):
         try:
             self.object = form.save()
+            Character.objects.get_or_create(user=self.object)
             login(self.request, self.object)
             return super().form_valid(form)
         except IntegrityError:

@@ -32,10 +32,40 @@ class Migration(migrations.Migration):
             model_name='todo',
             name='user',
         ),
+        migrations.AddField(
+            model_name='character',
+            name='exp',
+            field=models.IntegerField(default=0),
+        ),
+        migrations.AlterField(
+            model_name='character',
+            name='character_name',
+            field=models.TextField(blank=True, default=''),
+        ),
+        migrations.AlterField(
+            model_name='character',
+            name='evolution',
+            field=models.CharField(blank=True, default='', max_length=255),
+        ),
+        migrations.AlterField(
+            model_name='character',
+            name='image_url',
+            field=models.ImageField(blank=True, default='characters/initial_female.png', upload_to='characters/'),
+        ),
         migrations.AlterField(
             model_name='character',
             name='job',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='accounts.job'),
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='accounts.job'),
+        ),
+        migrations.AlterField(
+            model_name='character',
+            name='level',
+            field=models.IntegerField(default=1),
+        ),
+        migrations.AlterField(
+            model_name='character',
+            name='user',
+            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='character', to=settings.AUTH_USER_MODEL),
         ),
         migrations.AlterUniqueTogether(
             name='prompt',

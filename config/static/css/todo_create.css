@@ -1,0 +1,274 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+}
+
+.todo-create-page {
+  position: relative;
+  min-height: 100vh;
+  background: url("../img/first-full.png") center center / cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  overflow: hidden;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.todo-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1180px;
+  padding: 20px 10px;
+}
+
+.header-badge {
+  display: inline-block;
+  margin-bottom: 28px;
+  padding: 14px 34px;
+  font-size: 30px;
+  font-weight: bold;
+  color: #111;
+  background: #fff;
+  border: 2px solid #d9d9d9;
+  clip-path: polygon(0 0, 92% 0, 100% 50%, 92% 100%, 0 100%, 5% 50%);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.todo-form {
+  width: 100%;
+}
+
+.top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 36px;
+  margin-bottom: 28px;
+}
+
+.left-fields {
+  flex: 1;
+  min-width: 0;
+}
+
+.input {
+  width: 100%;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  background: rgba(180, 180, 180, 0.28);
+  color: #fff;
+  padding: 18px 20px;
+  outline: none;
+  backdrop-filter: blur(2px);
+}
+
+.input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.title-input {
+  height: 64px;
+  font-size: 28px;
+  margin-bottom: 18px;
+}
+
+.body-input {
+  min-height: 270px;
+  resize: none;
+  font-size: 26px;
+}
+
+.difficulty-box {
+  width: 360px;
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.difficulty-label {
+  color: #fff;
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 18px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+.difficulty-options {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.difficulty-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.difficulty-option input[type="radio"] {
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: transparent;
+  position: relative;
+  cursor: pointer;
+}
+
+.difficulty-option input[type="radio"]:checked::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ff2a2a;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.rank {
+  font-size: 42px;
+  font-weight: bold;
+  line-height: 1;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+.rank-a {
+  color: #ff1f1f;
+}
+
+.rank-b,
+.rank-c {
+  color: #ffffff;
+}
+
+.bottom-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 30px;
+  margin-top: 10px;
+}
+
+.date-group {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.date-input {
+  width: 200px;
+  height: 62px;
+  background: #fff;
+  border: 2px solid #d9d9d9;
+  color: #111;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 0 10px;
+  outline: none;
+  clip-path: polygon(0 0, 90% 0, 100% 50%, 90% 100%, 0 100%, 7% 50%);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.date-input::placeholder {
+  color: #111;
+  opacity: 1;
+}
+
+.submit-btn {
+  min-width: 260px;
+  height: 68px;
+  padding: 0 32px;
+  border: 2px solid #d9d9d9;
+  background: #fff;
+  color: #111;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  clip-path: polygon(0 0, 90% 0, 100% 50%, 90% 100%, 0 100%, 7% 50%);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 1000px) {
+  .top-row {
+    flex-direction: column;
+  }
+
+  .difficulty-box {
+    width: 100%;
+  }
+
+  .bottom-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .submit-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .todo-create-page {
+    padding: 20px;
+  }
+
+  .header-badge {
+    font-size: 22px;
+    padding: 12px 22px;
+  }
+
+  .title-input {
+    font-size: 22px;
+  }
+
+  .body-input {
+    font-size: 20px;
+    min-height: 220px;
+  }
+
+  .difficulty-label {
+    font-size: 22px;
+  }
+
+  .rank {
+    font-size: 32px;
+  }
+
+  .date-input,
+  .submit-btn {
+    width: 100%;
+    font-size: 22px;
+  }
+
+  .date-group {
+    width: 100%;
+    flex-direction: column;
+  }
+}

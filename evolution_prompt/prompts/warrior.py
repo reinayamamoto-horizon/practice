@@ -10,11 +10,11 @@ PROMPTS = {
     ),
 
     Skill.GUARDISN: (
-        "The same young female adventurer, now evolved into a stalwart guardian, "
-        "in heavy fortress-like armor, fighting to protect allies, "
-        "bracing behind an enormous tower shield while swinging a war hammer, "
-        "castle wall siege background with arrows deflecting off the shield, "
-        "epic fantasy RPG character art, highly detailed, cinematic lighting"
+        "The same young female adventurer, now evolved into a cleric knight, "
+        "with a muscular, well-defined and toned physique, "
+        "holding a large ornate shield with both hands, "
+        "epic fantasy RPG character art, highly detailed, cinematic lighting",
+        0.65,
     ),
 
     Skill.WARLORD: (

@@ -14,7 +14,7 @@ JOB_PROMPTS = {
 
 def _unpack_prompt(entry):
     # entryで文字列のみかタプル込みか判断できる
-    if isinstanse(entry, tuple):
+    if isinstance(entry, tuple):
         prompt_text, strength = entry
         return prompt_text, strength
     return entry, None
@@ -38,6 +38,6 @@ def build_character_image_prompt(job: str, skill_key: str) -> dict:
         params["strength"] = strength_override       
 
     return {
-        "prompt": f"{prompt}, {COMPOSITION}",
+        "prompt": f"{prompt_text}, {COMPOSITION}",
         **params,
     }

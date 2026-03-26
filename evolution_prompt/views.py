@@ -65,6 +65,7 @@ def evolution(request):
 
     return render(request, "evolutions/evolution.html", {"evolutions": evolutions})
 
+## 本来はダッシュボード画面に遷移
 @login_required
 def character(request):
     character = request.user.character

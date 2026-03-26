@@ -18,8 +18,11 @@
 </head>
 <body>
     {% if character.image_url %}
-    <div class="relative w-full min-h-screen bg-fixed bg-repeat-x  bg-center"
-         style="background-image: url('{{ MEDIA_URL }}{{ character.image_url }}');">
+    <div class="relative w-full min-h-screen bg-fixed bg-top bg-repeat-x"
+         style="
+         background-image: url('{{ MEDIA_URL }}{{ character.image_url }}');
+         background-size: auto 100%;
+         ">
         <header>
             <button class="sab-fonts m-14" type="button" onclick="history.back()">
                 &lt; back

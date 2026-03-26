@@ -33,5 +33,6 @@ IMAGE_PARAMS = {
         "incorrect hand anatomy",
         "bad hands",
         "Strabismus",
+        "musical instrument",
     ]),
 }

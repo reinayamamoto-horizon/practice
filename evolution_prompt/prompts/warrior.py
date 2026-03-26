@@ -2,10 +2,10 @@ from constants.skills import Skill
 
 PROMPTS = {
     Skill.BERSERKER: (
-        "The same young female adventurer, now evolved into a fearsome berserker, "
-        "with battle scars on her armor, dual-wielding massive war axes, "
-        "charging into battle with fierce determination, eyes glowing red with fury, "
-        "volcanic battlefield with embers and smoke in the background, "
+        "The same young female adventurer, now evolved into a fearsome berserker, wearing light armor with rugged details, "
+        "standing firmly while holding large battle axes, showing raw strength and readiness, "
+        "focused and intense expression, hint of ferocity without motion, "
+        "volcanic battlefield with embers and smoke creating a harsh atmosphere, "
         "epic fantasy RPG character art, highly detailed, cinematic lighting"
     ),
 

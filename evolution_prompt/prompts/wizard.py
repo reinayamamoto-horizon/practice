@@ -12,13 +12,12 @@ PROMPTS = {
     ),
 
     Skill.SUMMONER: (
-        "A gigantic spectral wolf spirit, towering and dominating the entire background,, "
-        "clearly visible, fully formed, not obscured, positioned directly behind the summoner, "
-        "The wolf is massive, much larger than the human, with glowing eyes and flowing spirit energy,, "
-        "A young female summoner stands in front of it inside a radiant summoning circle,"
-        "epic fantasy RPG character art, highly detailed, cinematic lighting,"
-        "The background becomes slightly darker",
-        0.65,
+        "Beside her are two gigantic, very friendly wolves."
+        "The wolves glow blue, and spirit energy flows from them."
+        "A huge, intricate magic circle shines brightly at her feet."
+        "A mystical aura envelops her, and magical particles and trails of light drift around her."
+        "epic fantasy RPG character art, highly detailed, cinematic lighting,",
+        0.60,
     ),
 
     Skill.CHRONOMANCER: (
@@ -27,7 +26,5 @@ PROMPTS = {
         "manipulating swirling time-space distortion between her hands, "
         "clock gears and hourglasses floating and shattering around, warped dimension background, "
         "epic fantasy RPG character art, highly detailed, cinematic lighting,"
-        "The background becomes slightly darker",
-        0.55,
     ),
 }

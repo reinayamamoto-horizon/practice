@@ -5,8 +5,7 @@ PROMPTS = {
         "The same young female adventurer, now evolved into a legendary sword saint, "
         "firmly gripping a longsword with both hands, hands clearly visible holding the sword hilt, "
         "sword fully visible, centered and prominent, blade facing forward, "
-        "epic fantasy RPG character art, highly detailed, cinematic lighting",
-        0.55,
+        "epic fantasy RPG character art, highly detailed, cinematic lighting"
     ),
 
     Skill.DIVINE_SHIELD: (
@@ -19,10 +18,10 @@ PROMPTS = {
     ),
 
     Skill.ARCANE_BLADE: (
-        "The same young female adventurer, now evolved into a spellblade, "
-        "wearing enchanted armor with glowing arcane runes, fighting with magic and sword, "
-        "slashing with a sword wreathed in swirling blue and purple magical flames, "
-        "mystical forest with floating magical particles in the background, "
+       "The same young female adventurer, now evolved into a spellblade, wearing enchanted armor with glowing arcane runes, "
+        "standing firmly upon a luminous magic circle, holding her sword in a ready stance, "
+        "calm and focused expression, magical energy subtly gathering around the blade, "
+        "mystical forest with faint floating particles and arcane atmosphere, "
         "epic fantasy RPG character art, highly detailed, cinematic lighting"
     ),
 }

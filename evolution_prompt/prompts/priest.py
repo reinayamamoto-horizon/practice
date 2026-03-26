@@ -2,10 +2,10 @@ from constants.skills import Skill
 
 PROMPTS = {
     Skill.HIGH_PRIEST: (
-        "A young female adventurer evolved into a serene high priest, wearing medieval white and gold robes, "
-        "standing in quiet prayer with hands gently clasped, radiating healing and purification energy, "
-        "soft golden halo above her head, calm and sacred expression, "
-        "grand cathedral interior with stained glass and divine light rays, "
+        "She is clad in a long white robe."
+        "She has her eyes closed, radiating healing and purifying energy."
+        "Light emanates from her body."
+        "A soft golden halo shines above her head, and she wears a serene and sacred expression."
         "epic fantasy RPG character art, highly detailed, cinematic lighting"
     ),
 
@@ -23,7 +23,6 @@ PROMPTS = {
         "standing in quiet prayer, head slightly bowed and gaze lowered, calm and graceful expression, "
         "soft glowing musical notes floating around her, representing healing through sacred song, "
         "moonlit sacred grove with glowing flowers, soft mist, and ethereal atmosphere, "
-        "epic fantasy RPG character art, highly detailed, cinematic lighting",
-        0.55,
+        "epic fantasy RPG character art, highly detailed, cinematic lighting"
     ),
 }

@@ -12,7 +12,7 @@ COMPOSITION = (
 IMAGE_PARAMS = {
     "output_format": "png",
     "mode": "image-to-image",
-    "strength": 0.50,
+    "strength": 0.55,
     "negative_prompt": ", ".join([
         "different face",
         "face change",

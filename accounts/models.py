@@ -21,15 +21,27 @@ class Prompt(models.Model):
 
 
 class Todo(models.Model):
+    RANK_CHOICES = [
+        ('A', 'A'),
+        ('B', 'B'),
+        ('C', 'C'),
+    ]
+
     character = models.ForeignKey(
         "Character",
         on_delete=models.CASCADE
     )
+
     title = models.CharField(max_length=255)
     body = models.TextField()
+    rank = models.CharField(max_length=1, choices=RANK_CHOICES, default='C')
+
     display_flag = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    start_at = models.DateTimeField(null=True, blank=True)
+    end_at = models.DateTimeField(null=True, blank=True)
+
     delete_flag = models.BooleanField(default=False)
 
 class Character(models.Model):  # 初期未設定OK

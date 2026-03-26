@@ -7,14 +7,12 @@
     <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-
     {% if VITE_DEV_SERVER_URL %}
     <link rel="stylesheet" href="{{ VITE_DEV_SERVER_URL }}/config/static/css/input.css" />
     {% else %}
     <link rel="stylesheet" href="{% static 'dist/assets/input.css' %}" />
     {% endif %}
-
-    <title>Todo作成</title>
+    <title>Todo編集</title>
     <link rel="stylesheet" href="{% static 'css/todo_create.css' %}" />
 </head>
 <body class="fonts">
@@ -22,7 +20,7 @@
         <div class="overlay"></div>
 
         <div class="todo-card">
-            <div class="header-badge">Todoを作成しよう！</div>
+            <div class="header-badge">Todoを編集しよう！</div>
 
             <form method="post" class="todo-form">
                 {% csrf_token %}
@@ -34,6 +32,7 @@
                             name="title"
                             class="input title-input"
                             placeholder="Todoタイトルを作成"
+                            value="{{ todo.title }}"
                             required
                         />
 
@@ -42,7 +41,7 @@
                             class="input body-input"
                             placeholder="Todo内容を作成"
                             required
-                        ></textarea>
+                        >{{ todo.body }}</textarea>
                     </div>
 
                     <div class="difficulty-box">
@@ -51,17 +50,17 @@
                         <div class="difficulty-options">
                             <label class="difficulty-option">
                                 <span class="rank rank-a">A</span>
-                                <input type="radio" name="rank" value="A" checked />
+                                <input type="radio" name="rank" value="A" {% if todo.rank == "A" %}checked{% endif %} />
                             </label>
 
                             <label class="difficulty-option">
                                 <span class="rank rank-b">B</span>
-                                <input type="radio" name="rank" value="B" />
+                                <input type="radio" name="rank" value="B" {% if todo.rank == "B" %}checked{% endif %} />
                             </label>
 
                             <label class="difficulty-option">
                                 <span class="rank rank-c">C</span>
-                                <input type="radio" name="rank" value="C" />
+                                <input type="radio" name="rank" value="C" {% if todo.rank == "C" %}checked{% endif %} />
                             </label>
                         </div>
                     </div>
@@ -69,19 +68,25 @@
 
                 <div class="bottom-row">
                     <div class="date-group">
-                        <input type="datetime-local" name="start_at" class="date-input" required />
-                        <input type="datetime-local" name="end_at" class="date-input" required />
+                        <input
+                            type="datetime-local"
+                            name="start_at"
+                            class="date-input"
+                            value="{% if todo.start_at %}{{ todo.start_at|date:'Y-m-d\\TH:i' }}{% endif %}"
+                            required
+                        />
+                        <input
+                            type="datetime-local"
+                            name="end_at"
+                            class="date-input"
+                            value="{% if todo.end_at %}{{ todo.end_at|date:'Y-m-d\\TH:i' }}{% endif %}"
+                            required
+                        />
                     </div>
 
-                    <button type="submit" class="submit-btn">討伐を依頼する</button>
+                    <button type="submit" class="submit-btn">Todoを更新する</button>
                 </div>
             </form>
-
-            <div class="back-row">
-                <form method="get" action="{% url 'dashboard:EXP_bar' %}">
-                    <button type="submit" class="back-btn">拠点へ戻る</button>
-                </form>
-            </div>
         </div>
     </div>
 </body>

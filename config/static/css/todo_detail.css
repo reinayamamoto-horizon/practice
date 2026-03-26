@@ -1,0 +1,140 @@
+body {
+    margin: 0;
+    font-family: 'DotGothic16', sans-serif;
+}
+
+.todo-detail-page {
+    position: relative;
+    min-height: 100vh;
+    background: url("../img/first-full.png") center center / cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.detail-card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 760px;
+    background: rgba(255, 255, 255, 0.72);
+    border: 3px solid #4a4a4a;
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.45);
+    padding: 36px;
+    box-sizing: border-box;
+    backdrop-filter: blur(3px);
+}
+
+.header-badge {
+    display: inline-block;
+    margin-bottom: 28px;
+    padding: 10px 20px;
+    background: rgba(217, 217, 217, 0.9);
+    border: 2px solid #555;
+    color: #222;
+    font-size: 22px;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.detail-section {
+    margin-bottom: 24px;
+}
+
+.detail-label {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #222;
+}
+
+.detail-box {
+    background: rgba(255, 255, 255, 0.55);
+    border: 2px solid #7a7a7a;
+    padding: 16px 18px;
+    color: #111;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+    line-height: 1.8;
+    word-break: break-word;
+}
+
+.title-box {
+    font-size: 24px;
+}
+
+.body-box {
+    min-height: 180px;
+    white-space: pre-wrap;
+}
+
+.rank-box {
+    display: inline-block;
+    min-width: 140px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.rank-a {
+    background: rgba(255, 217, 217, 0.85);
+    border-color: #b94a48;
+}
+
+.rank-b {
+    background: rgba(255, 241, 201, 0.85);
+    border-color: #b38b2d;
+}
+
+.rank-c {
+    background: rgba(223, 243, 255, 0.85);
+    border-color: #3e7fa6;
+}
+
+.button-row {
+    display: flex;
+    gap: 16px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+}
+
+.button-row form,
+.back-row form {
+    margin: 0;
+}
+
+.action-btn,
+.back-btn {
+    border: 2px solid #444;
+    background: rgba(229, 229, 229, 0.9);
+    color: #111;
+    font-family: inherit;
+    font-size: 16px;
+    padding: 12px 22px;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.action-btn:hover,
+.back-btn:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.edit-btn {
+    background: rgba(216, 240, 210, 0.92);
+}
+
+.delete-btn {
+    background: rgba(244, 202, 202, 0.92);
+}
+
+.back-row {
+    margin-top: 18px;
+}

@@ -16,13 +16,10 @@ body {
   align-items: center;
   justify-content: center;
   padding: 40px;
-  overflow: hidden;
 }
 
 .overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.45);
+  pointer-events: none;
 }
 
 .todo-card {
@@ -30,7 +27,7 @@ body {
   z-index: 1;
   width: 100%;
   max-width: 1180px;
-  padding: 20px 10px;
+  padding: 20px 10px 110px; /* 下に back-btn 用の余白を追加 */
 }
 
 .header-badge {
@@ -153,9 +150,12 @@ body {
   color: #ff1f1f;
 }
 
-.rank-b,
+.rank-b {
+  color: #3498db;
+}
+
 .rank-c {
-  color: #ffffff;
+  color: #2ecc71;
 }
 
 .bottom-row {
@@ -186,11 +186,6 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-.date-input::placeholder {
-  color: #111;
-  opacity: 1;
-}
-
 .submit-btn {
   min-width: 260px;
   height: 68px;
@@ -203,16 +198,47 @@ body {
   cursor: pointer;
   clip-path: polygon(0 0, 90% 0, 100% 50%, 90% 100%, 0 100%, 7% 50%);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition: transform 0.2s ease;
 }
 
 .submit-btn:hover {
   transform: translateY(-2px);
-  opacity: 0.95;
 }
 
-.submit-btn:active {
-  transform: translateY(0);
+.back-row {
+  position: absolute;
+  left: 10px;
+  bottom: 20px;
+  z-index: 10;
+}
+
+.back-row form {
+  margin: 0;
+}
+
+.back-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  min-width: 240px;
+  height: 64px;
+  padding: 0 28px;
+  border: 2px solid #d9d9d9;
+  background: rgba(255, 255, 255, 0.95);
+  color: #111;
+  font-family: "DotGothic16", sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 64px;
+  text-align: center;
+  cursor: pointer;
+  clip-path: polygon(0 0, 90% 0, 100% 50%, 90% 100%, 0 100%, 7% 50%);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
 }
 
 @media (max-width: 1000px) {
@@ -231,6 +257,15 @@ body {
 
   .submit-btn {
     width: 100%;
+  }
+
+  .todo-card {
+    padding-bottom: 130px;
+  }
+
+  .back-row {
+    left: 10px;
+    bottom: 24px;
   }
 }
 
@@ -270,5 +305,18 @@ body {
   .date-group {
     width: 100%;
     flex-direction: column;
+  }
+
+  .back-row {
+    position: static;
+    margin-top: 24px;
+  }
+
+  .back-btn {
+    width: 100%;
+    min-width: unset;
+    font-size: 18px;
+    height: 52px;
+    line-height: 52px;
   }
 }

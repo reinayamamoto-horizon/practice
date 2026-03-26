@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+    {% if VITE_DEV_SERVER_URL %}
+    <link rel="stylesheet" href="{{ VITE_DEV_SERVER_URL }}/config/static/css/input.css" />
+    {% else %}
+    <link rel="stylesheet" href="{% static 'dist/assets/input.css' %}" />
+    {% endif %}
+
+    <title>クエスト詳細</title>
+    <link rel="stylesheet" href="{% static 'css/todo_detail.css' %}">
+</head>
+<body>
+    <div class="todo-detail-page">
+        <div class="overlay"></div>
+
+        <div class="detail-card">
+            <div class="header-badge">クエスト詳細</div>
+
+            <div class="detail-section">
+                <div class="detail-label">タイトル</div>
+                <div class="detail-box title-box">
+                    {{ todo.title }}
+                </div>
+            </div>
+
+            <div class="detail-section">
+                <div class="detail-label">難易度</div>
+                <div class="detail-box rank-box rank-{{ todo.rank|lower }}">
+                    {{ todo.rank }}ランク
+                </div>
+            </div>
+
+            <div class="detail-section">
+                <div class="detail-label">内容</div>
+                <div class="detail-box body-box">
+                    {{ todo.body|linebreaksbr }}
+                </div>
+            </div>
+
+            <div class="button-row">
+                <form method="get" action="{% url 'dashboard:todo_edit' todo.id %}">
+                    <button type="submit" class="action-btn edit-btn">編集する</button>
+                </form>
+
+                <form method="post" action="{% url 'dashboard:todo_delete' todo.id %}" onsubmit="return confirm('このクエストを削除しますか？');">
+                    {% csrf_token %}
+                    <button type="submit" class="action-btn delete-btn">削除する</button>
+                </form>
+            </div>
+
+            <div class="back-row">
+                <form method="get" action="{% url 'dashboard:todo_list' todo.character.id %}">
+                    <button type="submit" class="back-btn">一覧へ戻る</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

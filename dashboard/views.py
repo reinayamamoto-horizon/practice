@@ -1,22 +1,34 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
-from .models import EXP
+
 from accounts.models import Todo,Character 
 
 
-class EXPbarView(View):
-    def get(self, request, user_id):
-        User_EXPdata = get_object_or_404(EXP, user_id=user_id)
-        context = {
-            "Current_level": User_EXPdata.level,
-            "Character_name": User_EXPdata.character_name,
-        }
-        return render(request, "dashboard/EXP_bar.html", context)
-    
-EXP_bar = EXPbarView.as_view()
-        
+
 class TodoListView(View):
-    pass
+    def get(self, request,character_id):
+        character = get_object_or_404(Character, id=character_id)
+
+        todos = Todo.objects.filter(
+            character=character,
+            delete_flag=False,
+            display_flag=True
+        )
+
+        context = {
+            "todos_A": todos.filter(rank='A'),
+            "todos_B": todos.filter(rank='B'),
+            "todos_C": todos.filter(rank='C'),
+        }
+        return render(request, "dashboard/todo_list.html", context)
+
+        def post(self, request, todo_id):
+            todo = get_object_or_404(Todo, id=todo_id, delete_flag=False)
+
+            return render(request, 'dashboard/todo_detail.html', {
+                'todo': todo,
+                'character': todo.character,
+            })
 
 class TodoCreateView(View):
     def get(self, request, character_id):
@@ -45,8 +57,62 @@ class TodoCreateView(View):
 
         return render(request,"dashboard/EXP_bar.html")
 
+class TodoDetailView(View):
+    def get(self, request, todo_id):
+        todo = get_object_or_404(Todo, id=todo_id, delete_flag=False)
+        return render(request, 'dashboard/todo_detail.html', {
+            'todo': todo,
+            'character': todo.character,
+        })
+
+    def post(self, request, todo_id):
+        todo = get_object_or_404(Todo, id=todo_id, delete_flag=False)
+        return render(request, 'dashboard/todo_detail.html', {
+            'todo': todo,
+            'character': todo.character,
+        })
+
 class TodoEditView(View):
-    pass
+    def get(self, request, todo_id):
+        todo = get_object_or_404(Todo, id=todo_id, delete_flag=False)
+
+        return render(request, 'dashboard/todo_edit.html', {
+            'todo': todo,
+            'character': todo.character,
+        })
+
+    def post(self, request, todo_id):
+        todo = get_object_or_404(Todo, id=todo_id, delete_flag=False)
+
+        title = request.POST.get('title')
+        body = request.POST.get('body')
+        start_at = request.POST.get('start_at')
+        end_at = request.POST.get('end_at')
+        rank = request.POST.get('rank')
+
+        todo.title = title
+        todo.body = body
+        todo.start_at = start_at or None
+        todo.end_at = end_at or None
+        todo.rank = rank
+        todo.save()
+
+        return render(request, "dashboard/todo_detail.html", {
+            "character": todo.character,
+            "todo": todo,
+            "message": "クエストを更新しました",
+        })
 
 class TodoDeleteView(View):
+    def post(self, request, todo_id):
+        todo = get_object_or_404(Todo, id=todo_id, delete_flag=False)
+
+        character_id = todo.character.id
+
+        todo.delete_flag = True
+        todo.save()
+
+        return redirect('dashboard:todo_list', character_id=character_id)
+
+class TodoCompleteView(View):
     pass

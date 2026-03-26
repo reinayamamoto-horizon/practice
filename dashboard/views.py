@@ -4,6 +4,9 @@ from django.views import View
 from accounts.models import Todo,Character 
 
 
+class EXPbarView(View):
+    pass
+
 
 class TodoListView(View):
     def get(self, request,character_id):

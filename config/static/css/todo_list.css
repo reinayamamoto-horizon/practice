@@ -119,3 +119,28 @@ body {
 .todo-link-button:hover {
     text-decoration: underline;
 }
+
+.back-fixed {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.back-fixed form {
+    margin: 0;
+}
+
+.back-btn {
+    border: 2px solid #444;
+    background: #e5e5e5;
+    padding: 12px 24px;
+    font-family: 'DotGothic16', sans-serif;
+    box-shadow: 4px 4px 0 #222;
+}
+
+.back-btn:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 #222;
+}

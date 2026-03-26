@@ -10,6 +10,7 @@ class IndexView(LoginRequiredMixin,View):
         context = {
             "Current_level": User_EXPdata.level,
             "Character_name": User_EXPdata.character_name,
+            "EXP_current_data":User_EXPdata.exp,
         }
         return render(request, "dashboard/Index.html", context)
     
@@ -43,7 +44,7 @@ class TodoCreateView(LoginRequiredMixin,View):
             rank=rank,
         )
 
-        return render(request,"dashboard/EXP_bar.html")
+        return render(request,"dashboard/Index.html")
 
 class TodoEditView(LoginRequiredMixin,View):
     pass

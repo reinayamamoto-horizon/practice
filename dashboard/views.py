@@ -4,14 +4,14 @@ from accounts.models import Todo,Character
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class EXPbarView(LoginRequiredMixin,View):
+class IndexView(LoginRequiredMixin,View):
     def get(self, request):
         User_EXPdata = Character()
         context = {
             "Current_level": User_EXPdata.level,
             "Character_name": User_EXPdata.character_name,
         }
-        return render(request, "dashboard/EXP_bar.html", context)
+        return render(request, "dashboard/Index.html", context)
     
 
         
@@ -51,4 +51,4 @@ class TodoEditView(LoginRequiredMixin,View):
 class TodoDeleteView(LoginRequiredMixin,View):
     pass
 
-EXP_bar = EXPbarView.as_view()
+Index = IndexView.as_view()

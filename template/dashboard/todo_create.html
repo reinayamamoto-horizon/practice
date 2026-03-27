@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+    {% if VITE_DEV_SERVER_URL %}
+    <link rel="stylesheet" href="{{ VITE_DEV_SERVER_URL }}/config/static/css/input.css" />
+    {% else %}
+    <link rel="stylesheet" href="{% static 'dist/assets/input.css' %}" />
+    {% endif %}
+
+    <title>Todo作成</title>
+    <link rel="stylesheet" href="{% static 'css/todo_create.css' %}" />
+</head>
+<body class="fonts">
+    <div class="todo-create-page">
+        <div class="overlay"></div>
+
+        <div class="todo-card">
+            <div class="header-badge">Todoを作成しよう！</div>
+
+            <form method="post" class="todo-form">
+                {% csrf_token %}
+
+                <div class="top-row">
+                    <div class="left-fields">
+                        <input
+                            type="text"
+                            name="title"
+                            class="input title-input"
+                            placeholder="Todoタイトルを作成"
+                            required
+                        />
+
+                        <textarea
+                            name="body"
+                            class="input body-input"
+                            placeholder="Todo内容を作成"
+                            required
+                        ></textarea>
+                    </div>
+
+                    <div class="difficulty-box">
+                        <span class="difficulty-label">依頼難易度を選択</span>
+
+                        <div class="difficulty-options">
+                            <label class="difficulty-option">
+                                <span class="rank rank-a">A</span>
+                                <input type="radio" name="rank" value="A" checked />
+                            </label>
+
+                            <label class="difficulty-option">
+                                <span class="rank rank-b">B</span>
+                                <input type="radio" name="rank" value="B" />
+                            </label>
+
+                            <label class="difficulty-option">
+                                <span class="rank rank-c">C</span>
+                                <input type="radio" name="rank" value="C" />
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bottom-row">
+                    <div class="date-group">
+                        <input type="datetime-local" name="start_at" class="date-input" required />
+                        <input type="datetime-local" name="end_at" class="date-input" required />
+                    </div>
+
+                    <button type="submit" class="submit-btn">討伐を依頼する</button>
+                </div>
+            </form>
+
+            <div class="back-row">
+                <form method="get" action="{% url 'dashboard:Index' %}">
+                    <button type="submit" class="back-btn">拠点へ戻る</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,146 @@
+body {
+    margin: 0;
+    font-family: 'DotGothic16', sans-serif;
+}
+
+.todo-list-page {
+    min-height: 100vh;
+    background: url("../img/first-full.png") center center / cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 70px 40px;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    text-align: center;
+}
+
+.title {
+    display: inline-block;
+    margin-bottom: 50px;
+    padding: 18px 48px;
+    font-size: 36px;
+    color: #d6d1c4;
+    background: #ececec;
+    border: 2px solid #5f5f5f;
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.45);
+}
+
+.board {
+    display: flex;
+    justify-content: center;
+    gap: 70px;
+    flex-wrap: wrap;
+}
+
+.column {
+    width: 280px;
+}
+
+.column h2 {
+    margin-bottom: 18px;
+    color: #fff;
+    font-size: 24px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.paper {
+    position: relative;
+    min-height: 360px;
+    background: #f2f2f2;
+    padding: 28px 22px;
+    box-sizing: border-box;
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.45);
+    text-align: left;
+}
+
+.paper::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 28px 28px;
+    border-color: transparent transparent #cfcfcf transparent;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+    color: #000;
+    font-size: 18px;
+}
+
+.todo-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.todo-item span {
+    flex: 1;
+    line-height: 1.4;
+}
+
+.paper p {
+    margin: 0;
+    text-align: center;
+    color: #222;
+    font-size: 20px;
+}
+
+.todo-detail-form {
+    flex: 1;
+    margin: 0;
+}
+
+.todo-link-button {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: none;
+    background: transparent;
+    text-align: left;
+    font: inherit;
+    color: #000;
+    cursor: pointer;
+    line-height: 1.4;
+}
+
+.todo-link-button:hover {
+    text-decoration: underline;
+}
+
+.back-fixed {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.back-fixed form {
+    margin: 0;
+}
+
+.back-btn {
+    border: 2px solid #444;
+    background: #e5e5e5;
+    padding: 12px 24px;
+    font-family: 'DotGothic16', sans-serif;
+    box-shadow: 4px 4px 0 #222;
+}
+
+.back-btn:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 #222;
+}

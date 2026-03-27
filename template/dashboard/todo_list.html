@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+    {% if VITE_DEV_SERVER_URL %}
+    <link rel="stylesheet" href="{{ VITE_DEV_SERVER_URL }}/config/static/css/input.css" />
+    {% else %}
+    <link rel="stylesheet" href="{% static 'dist/assets/input.css' %}" />
+    {% endif %}
+
+    <title>クエストリスト</title>
+    <link rel="stylesheet" href="{% static 'css/todo_list.css' %}">
+</head>
+
+<body>
+    <div class="todo-list-page">
+        <div class="container">
+            
+            <header class="flex justify-start pl-[10%]">
+                <div class="sab-fonts m-14">
+                    <a  href="{% url 'dashboard:Index'%}">
+                        < back
+                    </a>
+                </div>
+                <div class="m-14">
+                    <p class="fonts text-white text-[45px] style p-2">
+                      討伐リスト
+                    </p>
+                </div>
+            </header>
+
+            <div class="board">
+
+                <div class="column">
+                    <h2>難易度Aランク依頼</h2>
+                    <div class="paper">
+                        {% for todo in todos_A %}
+                        <div class="todo-item">
+                            <input type="checkbox" disabled>
+
+                            <form method="post" action="{% url 'dashboard:todo_detail' todo.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="submit-btn todo-button">
+                                    {{ todo.title }}
+                                </button>
+                            </form>
+                        </div>
+                        {% empty %}
+                        <p>なし</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="column">
+                    <h2>難易度Bランク依頼</h2>
+                    <div class="paper">
+                        {% for todo in todos_B %}
+                        <div class="todo-item">
+                            <input type="checkbox" disabled>
+
+                            <form method="post" action="{% url 'dashboard:todo_detail' todo.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="submit-btn todo-button">
+                                    {{ todo.title }}
+                                </button>
+                            </form>
+                        </div>
+                        {% empty %}
+                        <p>なし</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="column">
+                    <h2>難易度Cランク依頼</h2>
+                    <div class="paper">
+                        {% for todo in todos_C %}
+                        <div class="todo-item">
+                            <input type="checkbox" disabled>
+
+                            <form method="post" action="{% url 'dashboard:todo_detail' todo.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="submit-btn todo-button">
+                                    {{ todo.title }}
+                                </button>
+                            </form>
+                        </div>
+                        {% empty %}
+                        <p>なし</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

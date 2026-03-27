@@ -14,6 +14,8 @@
       center / cover fixed;
   }
 
+  
+
   .first-full{
     position: relative;
     width: 100%;
@@ -193,3 +195,4 @@
   0% { transform: translateY(100%); }
   100% { transform: translateY(-100%); }
 }
+

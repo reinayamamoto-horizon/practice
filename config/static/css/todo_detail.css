@@ -71,6 +71,7 @@ body {
 .body-box {
     min-height: 180px;
     white-space: pre-wrap;
+    text-align: left;
 }
 
 .rank-box {

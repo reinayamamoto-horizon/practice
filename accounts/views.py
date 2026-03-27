@@ -10,7 +10,7 @@ from .forms import SignupForm
 # Create your views here.
 class Login (LoginView):
     template_name = "accounts/login.html"
-    next_page = reverse_lazy("dashboard:Index")
+    next_page = reverse_lazy("dashboard:index")
 
     def form_invalid(self, form):
         context = self.get_context_data(form=form)
@@ -28,7 +28,7 @@ class Signup(CreateView):
             self.object = form.save()
             Character.objects.get_or_create(user=self.object)
             login(self.request, self.object)
-            return redirect(self.request,get_success_url())
+            return super().form_valid(form)
         except IntegrityError:
             form.add_error(None, "このメールアドレスは既に登録されています")
             return self.form_invalid(form)

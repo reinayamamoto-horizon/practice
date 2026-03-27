@@ -6,16 +6,16 @@ from .views import (
     TodoDetailView,
     TodoEditView,
     TodoDeleteView,
-    EXPbarView,
+    IndexView,
     TodoCompleteView,
 )
 
 app_name = "dashboard"
 
 urlpatterns = [
-    path('', views.Index, name="Index"),
+    path('', IndexView.as_view(), name="index"),
     path('list/', TodoListView.as_view(), name='todo_list'),
-    path('create/<int:character_id>/', TodoCreateView.as_view(), name='todo_create'),
+    path('create/', TodoCreateView.as_view(), name='todo_create'),
     path('detail/<int:todo_id>/', TodoDetailView.as_view(), name='todo_detail'),
     path('edit/<int:todo_id>/', TodoEditView.as_view(), name='todo_edit'),
     path('delete/<int:todo_id>/', TodoDeleteView.as_view(), name='todo_delete'),

@@ -7,16 +7,16 @@ from django.db import transaction
 
 
 class IndexView(LoginRequiredMixin,View):
-    def get(self, request, character_id):
-        character = get_object_or_404(Character, id=character_id)
-        todo = Todo.objects.filter(character=character, delete_flag=False)
+    def get(self, request):
+        character = request.user.character
+        todo = Todo.objects.filter(character=character, delete_flag=False,display_flag=True)
         now = timezone.now()
         context = {
             "character": character,
             "current_level": character.level,
             "character_name": character.character_name,
             "exp_current_data": character.exp,
-            "character_standing_img":character.image_url,
+            "character_standing_img":character.image_url.url,
             "todo_list": todo,
             "current_time": now,
         }

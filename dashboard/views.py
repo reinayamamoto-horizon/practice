@@ -1,39 +1,25 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
-
 from accounts.models import Todo,Character 
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class EXPbarView(View):
+class IndexView(LoginRequiredMixin,View):
+    def get(self, request):
+        User_EXPdata = Character()
+        context = {
+            "Current_level": User_EXPdata.level,
+            "Character_name": User_EXPdata.character_name,
+            "EXP_current_data":User_EXPdata.exp,
+        }
+        return render(request, "dashboard/Index.html", context)
+    
+
+        
+class TodoListView(LoginRequiredMixin,View):
     pass
 
-
-class TodoListView(View):
-    def get(self, request,character_id):
-        character = get_object_or_404(Character, id=character_id)
-
-        todos = Todo.objects.filter(
-            character=character,
-            delete_flag=False,
-            display_flag=True
-        )
-
-        context = {
-            "todos_A": todos.filter(rank='A'),
-            "todos_B": todos.filter(rank='B'),
-            "todos_C": todos.filter(rank='C'),
-        }
-        return render(request, "dashboard/todo_list.html", context)
-
-        def post(self, request, todo_id):
-            todo = get_object_or_404(Todo, id=todo_id, delete_flag=False)
-
-            return render(request, 'dashboard/todo_detail.html', {
-                'todo': todo,
-                'character': todo.character,
-            })
-
-class TodoCreateView(View):
+class TodoCreateView(LoginRequiredMixin,View):
     def get(self, request, character_id):
         character = get_object_or_404(Character, id=character_id)
         return render(request, 'dashboard/todo_create.html', {
@@ -58,7 +44,7 @@ class TodoCreateView(View):
             rank=rank,
         )
 
-        return render(request,"dashboard/EXP_bar.html")
+        return render(request,"dashboard/Index.html")
 
 class TodoDetailView(View):
     def get(self, request, todo_id):

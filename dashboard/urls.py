@@ -1,4 +1,5 @@
 from django.urls import path
+from . import views
 from .views import (
     TodoListView,
     TodoCreateView,
@@ -11,8 +12,8 @@ from .views import (
 app_name = "dashboard"
 
 urlpatterns = [
-    path("", EXPbarView.as_view(),name="EXP_bar"),
-    path('list/<int:character_id>/', TodoListView.as_view(), name='todo_list'),
+    path('', views.Index, name="Index"),
+    path('list/', TodoListView.as_view(), name='todo_list'),
     path('create/<int:character_id>/', TodoCreateView.as_view(), name='todo_create'),
     path('detail/<int:todo_id>/', TodoDetailView.as_view(), name='todo_detail'),
     path('edit/<int:todo_id>/', TodoEditView.as_view(), name='todo_edit'),

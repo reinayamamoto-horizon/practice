@@ -1,18 +1,34 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
-from accounts.models import Todo,Character 
+from accounts.models import Todo,Character
+from django.utils import timezone
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class IndexView(LoginRequiredMixin,View):
     def get(self, request):
-        User_EXPdata = Character()
+        User_EXPdata = get_object_or_404(Character)
+        Todo_data = get_object_or_404(Todo)
+        Now = timezone.now()
         context = {
             "Current_level": User_EXPdata.level,
             "Character_name": User_EXPdata.character_name,
             "EXP_current_data":User_EXPdata.exp,
+            "Todo_list":Todo_data.body,
+            "Current_time":Now,
         }
         return render(request, "dashboard/Index.html", context)
+        
+    def save(self, *args, **kwargs):
+        #一定値以上になったらレベルアップ
+        if self.exp >= 100:
+            self.level += 1
+            #100の時0に戻す
+            self.exp = (self.exp - 100)
+        
+        super().save(*args, **kwargs)
+        
+        
     
 
         

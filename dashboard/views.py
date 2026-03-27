@@ -15,6 +15,7 @@ class IndexView(LoginRequiredMixin,View):
             "current_level": character.level,
             "character_name": character.character_name,
             "exp_current_data": character.exp,
+            "character_standing_img":character.image_url,
             "todo_list": todo,
             "current_time": now,
         }

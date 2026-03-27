@@ -6,16 +6,17 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class IndexView(LoginRequiredMixin,View):
-    def get(self, request):
-        User_EXPdata = get_object_or_404(Character)
-        Todo_data = get_object_or_404(Todo)
-        Now = timezone.now()
+    def get(self, request, character_id):
+        character = get_object_or_404(Character, id=character_id)
+        todo = Todo.objects.filter(character=character, delete_flag=False)
+        now = timezone.now()
         context = {
-            "Current_level": User_EXPdata.level,
-            "Character_name": User_EXPdata.character_name,
-            "EXP_current_data":User_EXPdata.exp,
-            "Todo_list":Todo_data.body,
-            "Current_time":Now,
+            "character": character,
+            "current_level": character.level,
+            "character_name": character.character_name,
+            "exp_current_data": character.exp,
+            "todo_list": todo,
+            "current_time": now,
         }
         return render(request, "dashboard/Index.html", context)
         
@@ -33,7 +34,14 @@ class IndexView(LoginRequiredMixin,View):
 
         
 class TodoListView(LoginRequiredMixin,View):
-    pass
+    def get(self, request, character_id):
+        character = get_object_or_404(Character, id=character_id)
+        todo_list = Todo.objects.filter(character=character, delete_flag=False)
+        context={
+            "character": character,
+            "todo_list": todo_list,
+        }
+        return render(request, 'dashboard/todo_list.html', context)
 
 class TodoCreateView(LoginRequiredMixin,View):
     def get(self, request, character_id):

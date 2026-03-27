@@ -30,6 +30,7 @@ class Todo(models.Model):
         "Character",
         on_delete=models.CASCADE
     )
+
     title = models.CharField(max_length=255)
     body = models.TextField()
     rank = models.CharField(max_length=1, choices=RANK_CHOICES, default='C')

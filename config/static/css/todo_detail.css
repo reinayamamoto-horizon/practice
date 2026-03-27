@@ -17,7 +17,7 @@ body {
 .overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(0, 0, 0, 0.05);
 }
 
 .detail-card {
@@ -25,18 +25,19 @@ body {
     z-index: 1;
     width: 100%;
     max-width: 760px;
-    background: rgba(245, 245, 245, 0.96);
+    background: rgba(255, 255, 255, 0.72);
     border: 3px solid #4a4a4a;
     box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.45);
     padding: 36px;
     box-sizing: border-box;
+    backdrop-filter: blur(3px);
 }
 
 .header-badge {
     display: inline-block;
     margin-bottom: 28px;
     padding: 10px 20px;
-    background: #d9d9d9;
+    background: rgba(217, 217, 217, 0.9);
     border: 2px solid #555;
     color: #222;
     font-size: 22px;
@@ -54,7 +55,7 @@ body {
 }
 
 .detail-box {
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.55);
     border: 2px solid #7a7a7a;
     padding: 16px 18px;
     color: #111;
@@ -81,17 +82,17 @@ body {
 }
 
 .rank-a {
-    background: #ffd9d9;
+    background: rgba(255, 217, 217, 0.85);
     border-color: #b94a48;
 }
 
 .rank-b {
-    background: #fff1c9;
+    background: rgba(255, 241, 201, 0.85);
     border-color: #b38b2d;
 }
 
 .rank-c {
-    background: #dff3ff;
+    background: rgba(223, 243, 255, 0.85);
     border-color: #3e7fa6;
 }
 
@@ -110,7 +111,7 @@ body {
 .action-btn,
 .back-btn {
     border: 2px solid #444;
-    background: #e5e5e5;
+    background: rgba(229, 229, 229, 0.9);
     color: #111;
     font-family: inherit;
     font-size: 16px;
@@ -127,11 +128,11 @@ body {
 }
 
 .edit-btn {
-    background: #d8f0d2;
+    background: rgba(216, 240, 210, 0.92);
 }
 
 .delete-btn {
-    background: #f4caca;
+    background: rgba(244, 202, 202, 0.92);
 }
 
 .back-row {

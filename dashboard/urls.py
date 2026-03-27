@@ -5,11 +5,13 @@ from .views import (
     TodoDetailView,
     TodoEditView,
     TodoDeleteView,
+    EXPbarView,
 )
 
 app_name = "dashboard"
 
 urlpatterns = [
+    path("", EXPbarView.as_view(),name="EXP_bar"),
     path('list/<int:character_id>/', TodoListView.as_view(), name='todo_list'),
     path('create/<int:character_id>/', TodoCreateView.as_view(), name='todo_create'),
     path('detail/<int:todo_id>/', TodoDetailView.as_view(), name='todo_detail'),

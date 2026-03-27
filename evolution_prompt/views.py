@@ -22,15 +22,26 @@ JOB_CLASS_MAP = {
 @login_required
 def evolution(request):
     character = request.user.character
+    ticket = request.session.get("evolution_ticket", 0)
+    # チケットがなければ進化不可
+    if ticket <= 0:
+        return redirect("dashboard:Index")
 
     # character.job は FK → Job インスタンス。job_id 文字列を取り出す
     job_key = character.job.job_id if character.job else None
     job_class = JOB_CLASS_MAP.get(job_key)
 
     if request.method == "POST":
+        ticket = request.session.get("evolution_ticket", 0)
+        if ticket <= 0:
+            return redirect("dashboard:Index")
+
         evo = request.POST["evolution_id"]
         character.evolution = evo
-        character.save()
+        character.save(update_fields=["evolution"])
+
+        # チケットを消費
+        request.session["evolution_ticket"] = ticket - 1
 
         ##AIの画像生成プロンプト用
         if job_class and job_key and hasattr(job_class, "SKILLS"):
@@ -42,8 +53,8 @@ def evolution(request):
                 current_image = character.image_url.path if character.image_url else None
                 generate_image(params, out_path=f"media/{out_path}", image_path=current_image)
                 character.image_url = out_path
-                character.save()
-        return redirect("evolution_prompt:character")
+                character.save(update_fields=["image_url"])
+        return redirect("dashboard:Index")
 
 
     evolutions = []
@@ -63,7 +74,7 @@ def evolution(request):
                     "description": data["description"],
                 })
 
-    return render(request, "evolutions/evolution.html", {"evolutions": evolutions})
+    return render(request, "dashboard:Index", {"evolutions": evolutions})
 
 
 @login_required
@@ -79,6 +90,6 @@ def job(request):
         character.job = job_obj
         character.save()
         
-        return redirect ("evolution_prompt:evolution")
+        return redirect ("dashboard:Index")
 
     return render(request, "evolutions/job.html")

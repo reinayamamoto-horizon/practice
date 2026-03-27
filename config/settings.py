@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'dashboard.apps.DashboardConfig',
 ]
 
 MIDDLEWARE = [
@@ -149,7 +150,7 @@ STATICFILES_DIRS = [
 # 開発時は Vite の dev server から CSS を読む
 VITE_DEV_SERVER_URL = 'http://127.0.0.1:5174'
  # ログイン
-LOGIN_REDIRECT_URL = '/' 
+LOGIN_REDIRECT_URL = '/dashboard/' 
 LOGIN_URL = '/accounts/login/'  
 
 MEDIA_URL = '/media/'

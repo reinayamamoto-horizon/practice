@@ -19,7 +19,6 @@ class Prompt(models.Model):
         unique_together = (("character",),)
 
 
-
 class Todo(models.Model):
     RANK_CHOICES = [
         ('A', 'A'),
@@ -43,6 +42,9 @@ class Todo(models.Model):
     end_at = models.DateTimeField(null=True, blank=True)
 
     delete_flag = models.BooleanField(default=False)
+
+
+
 
 class Character(models.Model):  # 初期未設定OK
     user = models.OneToOneField("User", on_delete=models.CASCADE, related_name="character")

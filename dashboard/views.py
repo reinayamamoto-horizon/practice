@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
-
+from django.db import transaction
 from accounts.models import Todo,Character 
+
 
 
 class EXPbarView(View):
@@ -36,6 +37,7 @@ class TodoListView(View):
 class TodoCreateView(View):
     def get(self, request, character_id):
         character = get_object_or_404(Character, id=character_id)
+        context["character"] = character
         return render(request, 'dashboard/todo_create.html', {
             'character': character,
         })
@@ -117,5 +119,30 @@ class TodoDeleteView(View):
 
         return redirect('dashboard:todo_list', character_id=character_id)
 
+
+POINT_MAP = {
+    'A': 50,
+    'B': 30,
+    'C': 10,
+}
+
 class TodoCompleteView(View):
-    pass
+    def post(self, request, todo_id):
+        todo = get_object_or_404(Todo, id=todo_id, delete_flag=False)
+        character = todo.character.id
+
+        if not todo.display_flag:
+            return redirect("dashboard:todo_list", character_id=character.id)
+    
+        if getattr(todo, "is_completed", False):
+            return redirect("dashboard:todo_list", character_id=character.id)
+
+        point = POINT_MAP.get(todo.rank, 0)
+
+        with transaction.atomic():
+            todo.display_flag = False
+            todo.save(update_fields= ["display_flag"])
+            character.exp += point
+            character.save(update_fields=["exp"])
+        return redirect("dashboard:todo_list", character_id=character.id)
+

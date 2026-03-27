@@ -56,6 +56,12 @@
                     <button type="submit" class="action-btn delete-btn">削除する</button>
                 </form>
             </div>
+            <div>
+                <form action="{% url 'dashboard:todo_complate' todo.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="action-btn delete-btn">完了</button>
+                </form>
+            </div>
 
             <div class="back-row">
                 <form method="get" action="{% url 'dashboard:todo_list' todo.character.id %}">

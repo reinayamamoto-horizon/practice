@@ -6,6 +6,7 @@ from .views import (
     TodoEditView,
     TodoDeleteView,
     EXPbarView,
+    TodoCompleteView,
 )
 
 app_name = "dashboard"
@@ -17,4 +18,5 @@ urlpatterns = [
     path('detail/<int:todo_id>/', TodoDetailView.as_view(), name='todo_detail'),
     path('edit/<int:todo_id>/', TodoEditView.as_view(), name='todo_edit'),
     path('delete/<int:todo_id>/', TodoDeleteView.as_view(), name='todo_delete'),
+    path("complete/<int:todo_id>/", TodoCompleteView.as_view(), name="todo_complete"),
 ]

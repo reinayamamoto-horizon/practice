@@ -35,7 +35,7 @@
         }
     </script>
 
-    <title>Dashboard - {{ Character_name }}</title>
+    <title>Dashboard - {{ character_name }}</title>
 </head>
 <!--背景設定-->
 <body  class="h-screen bg-cover bg-center bg-no-repeat font-dot text-white antialiased first-full">
@@ -59,11 +59,11 @@
                         <!--Lv表示-->
                         <div class="font-bold italic text-3xl flex items-baseline gap-1" style="font-family: 'DotGothic16', sans-serif;">
                             <span class="text-lg">Lv</span>
-                            <span>{{ Current_level }}</span>
+                            <span>{{ current_level }}</span>
                         </div>
                         <!--キャラクター名表示-->
                         <div class="text-xl font-bold tracking-wide">
-                            {{ Character_name|default:"キャラクター名" }}
+                            {{ character_name|default:"キャラクター名" }}
                         </div>
                     </div>
 
@@ -74,62 +74,67 @@
                             </div>
                                 
                             <div class="absolute inset-0 flex justify-center items-center text-[10px] text-white font-bold drop-shadow-md">
-                                Lv.{{ player.level }} | {{ player.exp }} / 10
+                                {{ exp_current_data }}
                             </div>
                         </div>
                     </div>
 
-                    <!--画面上部と下部のボタン-->
+                    <!--画面上部のボタン-->
                     <div class="flex items-center gap-6 mt-1 text-sm bg-black/40 p-2 rounded border border-rpg-border">
                         <div class="flex items-center gap-2">
-                            <span class="text-rpg-gold text-lg">💰</span>
-                            <span>{{ Current_gold|default:"1234" }} <span class="text-xs text-rpg-gold">Gold</span></span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <span class="text-cyan-300 text-lg">💎</span>
-                            <span>{{ Current_gems|default:"340" }} <span class="text-xs text-cyan-300">Gems</span></span>
+                            <span class="text-rpg-gold text-lg">✏</span>
+                            <span>{{ exp_current_data }} <span class="text-xs text-rpg-gold">Total EXP</span></span>
                         </div>
                     </div>
                 </div>
             </div>
 
             <nav class="flex items-center gap-2">
-                <a href="#" class="px-4 py-2 bg-rpg-panel border border-rpg-border rounded-md text-sm text-rpg-gold hover:bg-rpg-border transition duration-150">PARTY</a>
-                <a href="#" class="px-4 py-2 bg-rpg-panel border border-rpg-border rounded-md text-sm text-rpg-gold hover:bg-rpg-border transition duration-150">INVENTORY</a>
-                <a href="#" class="px-4 py-2 bg-rpg-panel border border-rpg-border rounded-md text-sm text-rpg-gold hover:bg-rpg-border transition duration-150">QUESTS</a>
-                <a href="#" class="px-4 py-2 bg-rpg-panel border border-rpg-border rounded-md text-sm text-rpg-gold hover:bg-rpg-border transition duration-150">MAP</a>
+                <form method="get" action="{% url 'dashboard:todo_create' todo.id %}">
+                    <button type="submit" class="back-btn">作成</button>
+                </form>
+
+                <form method="get" action="{% url 'dashboard:todo_list' todo.character.id %}">
+                    <button type="submit" class="back-btn">リスト</button>
+                </form>
             </nav>
         </header>
 
-        <!--Todoリスト-->
+        <!--main-->
         <main class="flex justify-between items-center w-full grow mt-8 mb-8">
             <aside class="w-[30%] h-[300px] bg-[#fdf2d0] text-[#4a3b2b] p-5 rounded-md border-4 border-[#8b7355] shadow-2xl overflow-y-auto">
                 <h3 class="text-2xl font-bold mb-4 text-center border-b-2 border-[#8b7355] pb-2">To-Do List</h3>
                 <ul class="space-y-2 text-sm">
                     {% for todo in todo_list %}
                     <li class="flex items-start gap-2">
-                        <input type="checkbox" id="todo-{{ forloop.counter }}" class="mt-1 accent-[#8b7355]">
-                        <label for="todo-{{ forloop.counter }}">
-                            {{ todo.task|default:"デフォルトタスク" }}
+                        <input type="checkbox" id="todo-{{ todo.id }}" class="mt-1 accent-[#8b7355]">
+                        <label for="todo-{{ todo.id }}">
+                            <a href="{% url 'todo_detail' todo.id %}" class="hover:underline text-[#8b7355] font-semibold"></a>
+                            {{ todo.title }}
+                            </a>
                         </label>
                     </li>
                     {% empty %}
                     <li class="text-center text-gray-600 mt-4">タスクはありません</li>
-                    {% endfor %}
-                    <li class="flex items-start gap-2"><input type="checkbox" class="mt-1 accent-[#8b7355]"><label>Defeat 10 Goblins</label></li>
-                    <li class="flex items-start gap-2"><input type="checkbox" class="mt-1 accent-[#8b7355]"><label>Gather 5 Healing Herbs</label></li>
-                    <li class="flex items-start gap-2"><input type="checkbox" class="mt-1 accent-[#8b7355]"><label>Find the Lost Amulet</label></li>
-                </ul>
+                    {% endfor %} 
+                </ul>                  
             </aside>
+
+            <!--キャラクター画像-->
+            <div class="flex-grow flex justify-center items-center h-full z-0">
+                <img src="{{ MEDIA_URL }}characters/initial_female.png" 
+                     alt="Character Standing" 
+                     class="max-h-[500px] object-contain drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">
+            </div>
 
             <!--Todo作成-->
             <aside class="w-[30%] h-[300px] bg-black/60 border-2 border-rpg-border p-5 rounded-md flex flex-col justify-between items-center text-center">
                 <div class="w-full">
-                    <h3 class="text-2xl font-bold mb-4 border-b border-rpg-border pb-2 text-rpg-gold">Tips</h3>
+                    <h3 class="text-2xl font-bold mb-4 border-b border-rpg-border pb-2 text-rpg-gold">ひとこと</h3>
                     <p id="random-tip" class="text-4xl text-gray-400 mt-12 font-dot"></p>
                 </div>
                 
-                <a href="{% url 'dashboard:Index' %}" style="text-decoration: none;" class="w-full">
+                <a href="{% url 'dashboard:todo_create' character.id %}" style="text-decoration: none;" class="w-full">
                     <button class="w-full px-6 py-3 bg-gradient-to-b from-[#ff3333] to-[#800000] border-2 border-[#a00000] rounded text-xl font-bold text-white shadow-[0_4px_0_#600000] active:translate-y-0.5 active:shadow-[0_2px_0_#600000] transition-all" type="submit">
                         作成+
                     </button>
@@ -137,22 +142,36 @@
             </aside>
         </main>
 
-        <footer class="flex justify-center items-center w-full gap-2 mt-auto">
-            <button class="w-40 px-4 py-2.5 bg-rpg-panel border-2 border-rpg-border rounded-md text-sm text-rpg-gold hover:bg-rpg-border active:translate-y-0.5 transition-all">
-                ⚔️ ATTACK
-            </button>
-            <button class="w-40 px-4 py-2.5 bg-rpg-panel border-2 border-rpg-border rounded-md text-sm text-rpg-gold hover:bg-rpg-border active:translate-y-0.5 transition-all">
-                ✨ SKILLS
-            </button>
-            <button class="w-40 px-4 py-2.5 bg-rpg-panel border-2 border-rpg-border rounded-md text-sm text-rpg-gold hover:bg-rpg-border active:translate-y-0.5 transition-all">
-                🧙 MAGIC
-            </button>
-            <button class="w-40 px-4 py-2.5 bg-rpg-panel border-2 border-rpg-border rounded-md text-sm text-rpg-gold hover:bg-rpg-border active:translate-y-0.5 transition-all">
-                🎒 ITEMS
-            </button>
+        <footer class="flex justify-center items-center w-full mt-auto p-4">
+            <div class="w-full max-w-2xl px-6 py-4 bg-rpg-panel border-4 border-rpg-border rounded-lg shadow-lg flex flex-col items-center justify-center">
+        
+                <span class="text-xs text-rpg-border uppercase font-bold tracking-widest mb-1">Current Time / 現在時刻</span>
+        
+                <div class="text-2xl md:text-3xl text-rpg-gold font-serif tracking-tight flex items-center gap-3">
+                    <span>⏱</span>
+                    <span id="clock">{{ current_time|date:"Y-m-d H:i:s" }}</span>
+                </div>
+            </div>
         </footer>
 
     </div>
+    <script>
+    function updateClock() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        
+        const timeString = `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
+        document.getElementById('clock').textContent = timeString;
+    }
+
+        // 1秒（1000ミリ秒）ごとに実行
+        setInterval(updateClock, 1000);
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // 表示するメッセージのリスト

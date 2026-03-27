@@ -1,5 +1,4 @@
 from django.urls import path
-from . import views
 from .views import (
     TodoListView,
     TodoCreateView,
@@ -13,7 +12,7 @@ from .views import (
 app_name = "dashboard"
 
 urlpatterns = [
-    path('', IndexView.as_view(), name="index"),
+    path('', IndexView.as_view(), name="Index"),
     path('list/', TodoListView.as_view(), name='todo_list'),
     path('create/', TodoCreateView.as_view(), name='todo_create'),
     path('detail/<int:todo_id>/', TodoDetailView.as_view(), name='todo_detail'),

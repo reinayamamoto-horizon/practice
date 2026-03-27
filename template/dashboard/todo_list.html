@@ -22,8 +22,19 @@
 <body>
     <div class="todo-list-page">
         <div class="container">
-
-            <h1 class="title">討伐依頼リスト</h1>
+            
+            <header class="flex justify-start pl-[10%]">
+                <div class="sab-fonts m-14">
+                    <a  href="{% url 'dashboard:index'%}">
+                        < back
+                    </a>
+                </div>
+                <div class="m-14">
+                    <p class="fonts text-white text-[45px] style p-2">
+                      討伐リスト
+                    </p>
+                </div>
+            </header>
 
             <div class="board">
 

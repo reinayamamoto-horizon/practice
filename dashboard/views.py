@@ -3,6 +3,7 @@ from django.views import View
 from accounts.models import Todo,Character
 from django.utils import timezone
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db import transaction
 
 
 class IndexView(LoginRequiredMixin,View):
@@ -28,30 +29,35 @@ class IndexView(LoginRequiredMixin,View):
             self.exp = (self.exp - 100)
         
         super().save(*args, **kwargs)
-        
-        
-    
 
         
-class TodoListView(LoginRequiredMixin,View):
-    def get(self, request, character_id):
-        character = get_object_or_404(Character, id=character_id)
-        todo_list = Todo.objects.filter(character=character, delete_flag=False)
-        context={
-            "character": character,
-            "todo_list": todo_list,
+class TodoListView(View):
+    def get(self, request):
+        character = request.user.character
+
+        todos = Todo.objects.filter(
+            character=character,
+            delete_flag=False,
+            display_flag=True,
+        ).order_by("-created_at")
+
+        context = {
+            "todos_A": todos.filter(rank='A'),
+            "todos_B": todos.filter(rank='B'),
+            "todos_C": todos.filter(rank='C'),
         }
-        return render(request, 'dashboard/todo_list.html', context)
+        return render(request, "dashboard/todo_list.html", context)
+
 
 class TodoCreateView(LoginRequiredMixin,View):
-    def get(self, request, character_id):
-        character = get_object_or_404(Character, id=character_id)
+    def get(self, request):
+        character = request.user.character
         return render(request, 'dashboard/todo_create.html', {
             'character': character,
         })
 
-    def post(self, request, character_id):
-        character = get_object_or_404(Character, id=character_id)
+    def post(self, request):
+        character = request.user.character
 
         title = request.POST.get('title')
         body = request.POST.get('body')
@@ -68,18 +74,28 @@ class TodoCreateView(LoginRequiredMixin,View):
             rank=rank,
         )
 
-        return render(request,"dashboard/Index.html")
+        return redirect("dashboard:todo_list")
 
 class TodoDetailView(View):
     def get(self, request, todo_id):
-        todo = get_object_or_404(Todo, id=todo_id, delete_flag=False)
+        todo = get_object_or_404(
+            Todo,
+            id=todo_id,
+            delete_flag=False,
+            display_flag=True,
+        )
         return render(request, 'dashboard/todo_detail.html', {
             'todo': todo,
             'character': todo.character,
         })
 
     def post(self, request, todo_id):
-        todo = get_object_or_404(Todo, id=todo_id, delete_flag=False)
+        todo = get_object_or_404(
+            Todo,
+            id=todo_id,
+            delete_flag=False,
+            display_flag=True,
+        )
         return render(request, 'dashboard/todo_detail.html', {
             'todo': todo,
             'character': todo.character,
@@ -87,7 +103,12 @@ class TodoDetailView(View):
 
 class TodoEditView(View):
     def get(self, request, todo_id):
-        todo = get_object_or_404(Todo, id=todo_id, delete_flag=False)
+        todo = get_object_or_404(
+            Todo,
+            id=todo_id,
+            delete_flag=False,
+            display_flag=True,
+        )
 
         return render(request, 'dashboard/todo_edit.html', {
             'todo': todo,
@@ -95,7 +116,12 @@ class TodoEditView(View):
         })
 
     def post(self, request, todo_id):
-        todo = get_object_or_404(Todo, id=todo_id, delete_flag=False)
+        todo = get_object_or_404(
+            Todo,
+            id=todo_id,
+            delete_flag=False,
+            display_flag=True,
+        )
 
         title = request.POST.get('title')
         body = request.POST.get('body')
@@ -118,14 +144,44 @@ class TodoEditView(View):
 
 class TodoDeleteView(View):
     def post(self, request, todo_id):
-        todo = get_object_or_404(Todo, id=todo_id, delete_flag=False)
-
-        character_id = todo.character.id
+        todo = get_object_or_404(
+            Todo,
+            id=todo_id,
+            delete_flag=False,
+            display_flag=True,
+        )
 
         todo.delete_flag = True
         todo.save()
 
-        return redirect('dashboard:todo_list', character_id=character_id)
+        return redirect('dashboard:todo_list')
+
+
+POINT_MAP = {
+    'A': 50,
+    'B': 30,
+    'C': 10,
+}
 
 class TodoCompleteView(View):
-    pass
+    def post(self, request, todo_id):
+        todo = get_object_or_404(
+            Todo,
+            id=todo_id,
+            delete_flag=False,
+            display_flag=True,
+        )
+        character = todo.character
+
+        point = POINT_MAP.get(todo.rank, 0)
+
+        with transaction.atomic():
+
+            todo.display_flag = False
+            todo.save(update_fields= ["display_flag"])
+
+            character.exp += point
+            character.save(update_fields=["exp"])
+
+        return redirect("dashboard:todo_list")
+

@@ -115,8 +115,8 @@
             </nav>
         </header>
 
-        <!--main-->
-        <main class="flex justify-between items-center w-full grow mt-8 mb-8">
+        <!--main（2カラムを画面下・フッターの上に固定）-->
+        <main class="fixed bottom-28 left-0 right-0 z-30 flex justify-between items-end gap-4 px-4 w-full max-w-[100vw] box-border">
             <aside class="w-[35%] h-[320px] bg-[#fdf2d0] text-[#4a3b2b] p-5 rounded-md border-4 border-[#8b7355] shadow-2xl overflow-y-auto">
                 <a href="{% url 'dashboard:todo_list' %}">
                 <h3 class="text-2xl font-bold mb-4 text-center border-b-2 border-[#8b7355] pb-2">ToDo List</h3>
@@ -149,6 +149,7 @@
                     </button>
                 </a>
                 {% if evolution_button %}
+                <p class="text-rpg-gold text-sm mb-1">進化権：{{ evolution_ticket }}</p>
                 <a href="{% url 'evolution_prompt:job' %}" style="text-decoration: none;" class="w-full"> 
                     <button class="w-full px-6 py-3 bg-[#C22047] bg-gradient-to-b from-[#ff4444] to-[#990000] border-2 border-[#b00000] rounded-md text-xl font-bold text-white shadow-[0_6px_0_#600000] active:translate-y-1 active:shadow-[0_2px_0_#600000] transition-all tracking-widest hover:brightness-110" type="submit"> 
                         進化する
@@ -163,7 +164,7 @@
 
         </main>
 
-        <footer class="flex justify-center items-center w-full mt-auto p-4 fixed bottom-0 left-0 w-full z-50">
+        <footer class="flex justify-center items-center w-full p-4 fixed bottom-0 left-0 right-0 z-50">
             <div class="w-full max-w-sm px-2 py-1 bg-rpg-panel border-4 border-rpg-border rounded-lg shadow-lg flex flex-col items-center justify-center">
         
                 <span class="text-xs text-rpg-border uppercase font-bold tracking-widest mb-1">Current Time / 現在時刻</span>

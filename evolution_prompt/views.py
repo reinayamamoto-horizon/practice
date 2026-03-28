@@ -23,7 +23,7 @@ JOB_CLASS_MAP = {
 def evolution(request):
     character = request.user.character
     ticket = request.session.get("evolution_ticket", 0)
-    # チケットがなければ進化不可
+    # チケットがなければ進化フローへ入れない（消費は進化確定 POST のみ）
     if ticket <= 0:
         return redirect("dashboard:Index")
 
@@ -40,7 +40,7 @@ def evolution(request):
         character.evolution = evo
         character.save(update_fields=["evolution"])
 
-        # チケットを消費
+        # 進化を確定したときだけチケットを1消費（Job 選択では消費しない）
         request.session["evolution_ticket"] = ticket - 1
 
         ##AIの画像生成プロンプト用
@@ -74,15 +74,28 @@ def evolution(request):
                     "description": data["description"],
                 })
 
-    return render(request, "dashboard:Index", {"evolutions": evolutions})
+    return render(
+        request,
+        "evolutions/evolution.html",
+        {"evolutions": evolutions, "evolution_ticket": ticket},
+    )
 
 
 @login_required
 def job(request):
+    # 職業選択も進化フローの一部。チケットはここでは消費しない（Index でボタン表示と同条件）
+    ticket = request.session.get("evolution_ticket", 0)
+    if ticket <= 0:
+        return redirect("dashboard:Index")
+
     if request.method == 'POST':
         job_id = request.POST.get('job_id')
         if not job_id:
-            return render(request,"evolutions/job.html", {"error": "職業を選んでください"})
+            return render(
+                request,
+                "evolutions/job.html",
+                {"error": "職業を選んでください", "evolution_ticket": ticket},
+            )
 
         job_obj = get_object_or_404(Job, job_id=job_id, stage=1)
 
@@ -90,6 +103,6 @@ def job(request):
         character.job = job_obj
         character.save()
         
-        return redirect ("dashboard:Index")
+        return redirect("evolution_prompt:evolution")
 
-    return render(request, "evolutions/job.html")
+    return render(request, "evolutions/job.html", {"evolution_ticket": ticket})

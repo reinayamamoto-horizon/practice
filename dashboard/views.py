@@ -25,6 +25,7 @@ class IndexView(LoginRequiredMixin,View):
             "todo_list": todo,
             "current_time": now,
             "evolution_button": request.session.get("evolution_ticket", 0) > 0,
+            "evolution_ticket": request.session.get("evolution_ticket", 0),
             "exp_current_data": f"{character.exp} / {MAX_EXP}",
             "exp_percentage": exp_percentage,
             

@@ -26,7 +26,9 @@
               <p class="fonts text-white text-[45px] style p-2">
                 進化する職業を選択
               </p>
-              <p class="fonts text-white pt-4">※職業は変更できません</p>
+              {% if evolution_ticket %}
+              <p class="fonts text-amber-200 pt-2 text-lg">進化権（このあと進化確定で1消費）：{{ evolution_ticket }}</p>
+              {% endif %}
             </div>
         </header>
 

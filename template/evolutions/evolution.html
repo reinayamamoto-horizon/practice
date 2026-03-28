@@ -26,6 +26,9 @@
                 <p class="fonts text-white text-[45px] style p-2">
                   キャラクターを進化させよう！
                 </p>
+                {% if evolution_ticket %}
+                <p class="fonts text-amber-200 pt-2 text-lg">進化権（選択して決定すると1消費）：{{ evolution_ticket }}</p>
+                {% endif %}
             </div>
         </header>
 

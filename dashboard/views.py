@@ -11,15 +11,23 @@ class IndexView(LoginRequiredMixin,View):
         character = request.user.character
         todo = Todo.objects.filter(character=character, delete_flag=False,display_flag=True)
         now = timezone.now()
+        #経験値計算
+        MAX_EXP = 100
+        #割合計算(0〜100に収める)
+        exp_percentage = min((character.exp / MAX_EXP) * 100, 100)
+            
         context = {
             "character": character,
             "current_level": character.level,
             "character_name": character.character_name,
-            "exp_current_data": character.exp,
+            "exp_total_data": character.exp,
             "character_standing_img":character.image_url.url,
             "todo_list": todo,
             "current_time": now,
             "evolution_button": request.session.get("evolution_ticket", 0) > 0,
+            "exp_current_data": f"{character.exp} / {MAX_EXP}",
+            "exp_percentage": exp_percentage,
+            
         }
         return render(request, "dashboard/Index.html", context)
         

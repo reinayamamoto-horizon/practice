@@ -19,6 +19,7 @@ class IndexView(LoginRequiredMixin,View):
             "character_standing_img":character.image_url.url,
             "todo_list": todo,
             "current_time": now,
+            "evolution_button": request.session.get("evolution_ticket", 0) > 0,
         }
         return render(request, "dashboard/Index.html", context)
         
@@ -173,7 +174,6 @@ class TodoCompleteView(View):
             display_flag=True,
         )
         character = todo.character
-
         point = POINT_MAP.get(todo.rank, 0)
 
         with transaction.atomic():
@@ -181,8 +181,21 @@ class TodoCompleteView(View):
             todo.display_flag = False
             todo.save(update_fields= ["display_flag"])
 
+            level_up_count = 0
             character.exp += point
-            character.save(update_fields=["exp"])
+            
+            while character.exp >= 100:
+                character.exp -= 100
+                character.level += 1
+                level_up_count += 1
+
+            character.save(update_fields=["exp", "level"])
+
+            # レベルアップ回数ぶん進化チケットを付与
+            if level_up_count > 0:
+                request.session["evolution_ticket"] = (
+                    request.session.get("evolution_ticket", 0) + level_up_count
+                )
 
         return redirect("dashboard:todo_list")
 

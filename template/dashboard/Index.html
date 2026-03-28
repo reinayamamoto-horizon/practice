@@ -112,6 +112,15 @@
                         ToDoリスト
                     </button>
                 </form>
+
+                <form method="post" action="{% url 'accounts:logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" 
+                            class="w-32 py-3 bg-[#96C78C] bg-gradient-to-b from-[#ff4444] to-[#990000] border-2 border-[#b00000] rounded-md text-xl font-bold text-white shadow-[0_6px_0_#600000] active:translate-y-1 active:shadow-[0_2px_0_#600000] transition-all tracking-widest hover:brightness-110"
+                            style="font-family: 'DotGothic16', sans-serif;">
+                        ログアウト
+                    </button>
+                </form>
             </nav>
         </header>
 
